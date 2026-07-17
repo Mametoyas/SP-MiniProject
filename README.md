@@ -44,14 +44,7 @@ SP - MiniProject/
     │   ├── hangman.html
     │   ├── hangman.css
     │   └── hangman.js
-    ├── number_guess/       # เกม Number Guess
-    │   ├── number_guess.html
-    │   ├── number_guess.css
-    │   └── number_guess.js
-    └── word_scramble/      # เกม Word Scramble
-        ├── word_scramble.html
-        ├── word_scramble.css
-        └── word_scramble.js
+
 ```
 
 ---
