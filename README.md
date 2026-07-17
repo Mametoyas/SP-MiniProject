@@ -1,13 +1,24 @@
 <div align="center">
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=4FC3F7&center=true&vCenter=true&width=500&lines=Welcome+to+OUR+GitHub!;Script+Programming+Mini Project;College+of+Computing" />
+
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=4FC3F7&center=true&vCenter=true&width=500&lines=Welcome+to+OUR+GitHub!;Script+Programming+Mini+Project;College+of+Computing" />
+
+<br/>
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
 </div>
 
 ---
 
 # Mini Game Hub
+
 Repository นี้จัดทำขึ้นเพื่อใช้สำหรับ **Mini Project** ในรายวิชาเท่านั้น
 
-**รายวิชา:** Script Programming  ---  CP352301
+**รายวิชา:** Script Programming &nbsp;---&nbsp; CP352301
 
 ---
 
@@ -47,19 +58,19 @@ SP - MiniProject/
 
 ## วิธีติดตั้งและรัน
 
-### 1. ติดตั้ง dependencies
+**1. ติดตั้ง dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. รัน Flask server
+**2. รัน Flask server**
 
 ```bash
 python app.py
 ```
 
-### 3. เปิดเบราว์เซอร์
+**3. เปิดเบราว์เซอร์**
 
 ```
 http://localhost:5000
@@ -70,6 +81,7 @@ http://localhost:5000
 ## เกมที่มี
 
 ### Hangman — Game Boy Edition
+
 > สไตล์ Game Boy สีเขียวพิกเซล
 
 **วิธีเล่น:**
@@ -81,14 +93,15 @@ http://localhost:5000
 **หมวดคำ:** สัตว์ / ผลไม้ / ประเทศ (สุ่มอัตโนมัติ)
 
 **API:**
+
 | Method | Endpoint | คำอธิบาย |
-|--------|----------|-----------|
-| POST | `/api/hangman/new` | เริ่มเกมใหม่ |
-| POST | `/api/hangman/guess` | ส่งตัวอักษรที่เดา `{ "letter": "a" }` |
+|:------:|----------|-----------|
+| `POST` | `/api/hangman/new` | เริ่มเกมใหม่ |
+| `POST` | `/api/hangman/guess` | ส่งตัวอักษรที่เดา `{ "letter": "a" }` |
 
 ---
 
-## 📝 หมายเหตุ
+## หมายเหตุ
 
-- Game state เก็บใน memory — รีเซ็ตเมื่อ restart server
-- แต่ละเกมมี CSS แยกกันอิสระ ทีมสามารถแก้สไตล์ได้โดยไม่กระทบกัน
+> Game state เก็บใน memory — รีเซ็ตเมื่อ restart server  
+> แต่ละเกมมี CSS แยกกันอิสระ ทีมสามารถแก้สไตล์ได้โดยไม่กระทบกัน
