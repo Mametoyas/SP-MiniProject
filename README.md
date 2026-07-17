@@ -24,7 +24,38 @@ Repository นี้จัดทำขึ้นเพื่อใช้สำห
 
 ## Student Information
 
-
+<table>
+  <tr>
+    <th>#</th>
+    <th>ชื่อ - นามสกุล</th>
+    <th>รหัสนักศึกษา</th>
+    <th>สาขาวิชา</th>
+  </tr>
+  <tr>
+    <td align="center">1</td>
+    <td>นายจักรพรรดิ์ มั่งกูล</td>
+    <td align="center">663380518-4</td>
+    <td>Artificial Intelligence (AI)</td>
+  </tr>
+  <tr>
+    <td align="center">2</td>
+    <td>นายเชิดตระกูล แข็งขัน</td>
+    <td align="center">663380305-1</td>
+    <td>Artificial Intelligence (AI)</td>
+  </tr>
+  <tr>
+    <td align="center">3</td>
+    <td>&lt;ชื่อ นามสกุล&gt;</td>
+    <td align="center">&lt;รหัสนักศึกษา&gt;</td>
+    <td>&lt;สาขาวิชา&gt;</td>
+  </tr>
+  <tr>
+    <td align="center">4</td>
+    <td>&lt;ชื่อ นามสกุล&gt;</td>
+    <td align="center">&lt;รหัสนักศึกษา&gt;</td>
+    <td>&lt;สาขาวิชา&gt;</td>
+  </tr>
+</table>
 
 ---
 
