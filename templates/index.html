@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAME HUB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/menu.css">
+</head>
+<body>
+
+  <!-- Boot screen -->
+  <div id="boot-screen">
+    <div class="boot-logo">GAME<span>HUB</span></div>
+    <div class="boot-bar"><div class="boot-fill"></div></div>
+    <div class="boot-hint">LOADING...</div>
+  </div>
+
+  <!-- Menu screen -->
+  <main id="menu-screen" class="hidden">
+
+    <div class="menu-header">
+      <h1>🕹 GAME HUB</h1>
+      <p class="subtitle">เลือกเกม / SELECT YOUR GAME</p>
+    </div>
+
+    <div class="game-grid">
+
+      <!-- Hangman — available -->
+      <a class="game-card card-hangman" href="/hangman">
+        <div class="card-glow"></div>
+        <div class="card-icon">☠</div>
+        <div class="card-title">HANGMAN</div>
+        <div class="card-desc">เดาตัวอักษร<br>ก่อนถูกแขวนคอ</div>
+        <div class="card-badge available">▶ PLAY</div>
+      </a>
+
+      <!-- Number Guess — coming soon -->
+      <div class="game-card card-number locked">
+        <div class="card-icon muted">🔢</div>
+        <div class="card-title muted">NUMBER<br>GUESS</div>
+        <div class="card-desc muted">เดาตัวเลข 1-100<br>ใน 10 ครั้ง</div>
+        <div class="card-badge coming">🔒 COMING SOON</div>
+      </div>
+
+      <!-- Word Scramble — coming soon -->
+      <div class="game-card card-scramble locked">
+        <div class="card-icon muted">✏</div>
+        <div class="card-title muted">WORD<br>SCRAMBLE</div>
+        <div class="card-desc muted">เรียงตัวอักษร<br>ให้ถูกก่อนหมดเวลา</div>
+        <div class="card-badge coming">🔒 COMING SOON</div>
+      </div>
+
+    </div>
+
+    <p class="footer">© GAME HUB — GAME BOY EDITION</p>
+  </main>
+
+  <script src="/static/menu.js"></script>
+</body>
+</html>

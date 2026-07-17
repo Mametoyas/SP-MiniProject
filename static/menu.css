@@ -1,0 +1,303 @@
+/* ═══════════════════════════════════════════
+   menu.css — Game Hub (Vibrant Edition)
+   ═══════════════════════════════════════════ */
+
+/* ── Variables ─────────────────────────────── */
+:root {
+  --bg:        #0d0d1a;
+  --pixel:     'Press Start 2P', monospace;
+
+  /* Card accent colors */
+  --hangman-a: #ff6b9d;
+  --hangman-b: #ff3366;
+  --number-a:  #6bcfff;
+  --number-b:  #3399ff;
+  --scramble-a:#ffe066;
+  --scramble-b:#ffaa00;
+}
+
+/* ── Reset ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ───────────────────────────────────── */
+body {
+  background:      var(--bg);
+  font-family:     var(--pixel);
+  min-height:      100vh;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  image-rendering: pixelated;
+  overflow:        hidden;
+}
+
+/* ── Star background ────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10%  15%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 25%  60%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 40%  30%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 55%  80%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 70%  20%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 80%  55%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 90%  10%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 15%  90%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 60%  45%, #fff 0%, transparent 100%),
+    radial-gradient(1px 1px at 35%  75%, #fff 0%, transparent 100%),
+    radial-gradient(2px 2px at 50%   5%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(2px 2px at 85%  70%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(2px 2px at  5%  50%, rgba(255,255,255,0.6) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Scanline overlay ───────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent, transparent 3px,
+    rgba(0,0,0,0.06) 3px, rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 998;
+}
+
+/* ── Boot screen ────────────────────────────── */
+#boot-screen {
+  position:       relative;
+  z-index:        10;
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            24px;
+  text-align:     center;
+  padding:        24px;
+}
+
+.boot-logo {
+  font-size:      clamp(24px, 7vw, 48px);
+  color:          #fff;
+  text-shadow:    0 0 20px #ff6b9d, 4px 4px 0 #1a0030;
+  letter-spacing: 6px;
+  animation:      flicker 0.12s step-end 4;
+}
+
+.boot-logo span {
+  color: var(--hangman-a);
+  text-shadow: 0 0 20px var(--hangman-a), 4px 4px 0 #1a0030;
+}
+
+.boot-bar {
+  width:      260px;
+  height:     14px;
+  border:     3px solid #444;
+  background: #111;
+  border-radius: 2px;
+}
+
+.boot-fill {
+  height:     100%;
+  width:      0%;
+  background: linear-gradient(90deg, var(--hangman-b), var(--hangman-a), var(--scramble-b));
+  animation:  fill-bar 1.4s steps(26, end) forwards;
+}
+
+.boot-hint {
+  font-size: 7px;
+  color:     #555;
+  animation: blink 0.6s step-end infinite;
+}
+
+/* ── Menu screen ────────────────────────────── */
+#menu-screen {
+  position:       relative;
+  z-index:        10;
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            28px;
+  padding:        32px 16px 48px;
+  width:          100%;
+  max-width:      720px;
+  animation:      fade-in 0.5s ease;
+}
+
+#menu-screen.hidden { display: none; }
+
+/* ── Header ─────────────────────────────────── */
+.menu-header { text-align: center; }
+
+h1 {
+  font-size:      clamp(16px, 4vw, 28px);
+  color:          #fff;
+  text-shadow:    0 0 24px var(--hangman-a), 4px 4px 0 #1a0030;
+  letter-spacing: 4px;
+  margin-bottom:  12px;
+}
+
+.subtitle {
+  font-size:      7px;
+  color:          #666;
+  letter-spacing: 2px;
+}
+
+/* ── Game grid ──────────────────────────────── */
+.game-grid {
+  display:               grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap:                   24px;
+  width:                 100%;
+}
+
+/* ── Game card base ─────────────────────────── */
+.game-card {
+  position:        relative;
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  gap:             12px;
+  padding:         28px 16px 20px;
+  background:      #13131f;
+  border:          3px solid #333;
+  border-radius:   4px;
+  text-decoration: none;
+  color:           #fff;
+  overflow:        hidden;
+  transition:      transform 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+/* ── Glow blob (decorative) ─────────────────── */
+.card-glow {
+  position:      absolute;
+  top:           -40px;
+  left:          50%;
+  transform:     translateX(-50%);
+  width:         120px;
+  height:        120px;
+  border-radius: 50%;
+  opacity:       0.18;
+  filter:        blur(30px);
+  transition:    opacity 0.3s;
+  pointer-events: none;
+}
+
+/* ── Hangman card ───────────────────────────── */
+.card-hangman { border-color: var(--hangman-b); }
+.card-hangman .card-glow { background: var(--hangman-a); }
+.card-hangman .card-icon { color: var(--hangman-a); text-shadow: 0 0 12px var(--hangman-a); }
+.card-hangman .card-title { color: var(--hangman-a); }
+
+.card-hangman:hover {
+  transform:    translateY(-6px);
+  border-color: var(--hangman-a);
+  box-shadow:   0 0 24px var(--hangman-b), 0 8px 32px rgba(0,0,0,0.6);
+}
+
+.card-hangman:hover .card-glow { opacity: 0.35; }
+
+.card-hangman:active { transform: translateY(-2px); }
+
+/* ── Number card ────────────────────────────── */
+.card-number { border-color: #2a2a3a; }
+.card-number .card-icon { color: var(--number-a); }
+.card-number .card-title { color: var(--number-a); }
+
+/* ── Scramble card ──────────────────────────── */
+.card-scramble { border-color: #2a2a3a; }
+.card-scramble .card-icon { color: var(--scramble-a); }
+.card-scramble .card-title { color: var(--scramble-a); }
+
+/* ── Locked state ───────────────────────────── */
+.locked { cursor: not-allowed; }
+.locked::after {
+  content:    '';
+  position:   absolute;
+  inset:      0;
+  background: rgba(0,0,0,0.55);
+}
+
+/* ── Card elements ──────────────────────────── */
+.card-icon {
+  font-size:   36px;
+  line-height: 1;
+  transition:  transform 0.2s;
+}
+
+.card-hangman:hover .card-icon { transform: scale(1.15) rotate(-5deg); }
+
+.card-title {
+  font-size:   clamp(9px, 2.2vw, 12px);
+  text-align:  center;
+  line-height: 2;
+}
+
+.card-desc {
+  font-size:   6px;
+  color:       #555;
+  text-align:  center;
+  line-height: 2.2;
+}
+
+.muted { opacity: 0.4; }
+
+/* ── Badge ──────────────────────────────────── */
+.card-badge {
+  font-size:      6px;
+  padding:        5px 10px;
+  border-radius:  2px;
+  letter-spacing: 1px;
+  margin-top:     4px;
+  position:       relative;
+  z-index:        2;
+}
+
+.card-badge.available {
+  background: var(--hangman-b);
+  color:      #fff;
+  box-shadow: 0 0 10px var(--hangman-b);
+  animation:  pulse-badge 1.6s ease-in-out infinite;
+}
+
+.card-badge.coming {
+  background: #1e1e2e;
+  color:      #444;
+  border:     2px solid #333;
+}
+
+/* ── Footer ─────────────────────────────────── */
+.footer {
+  font-size:  6px;
+  color:      #333;
+  letter-spacing: 1px;
+}
+
+/* ── Animations ─────────────────────────────── */
+@keyframes fill-bar {
+  to { width: 100%; }
+}
+
+@keyframes flicker {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-badge {
+  0%,100% { box-shadow: 0 0 8px  var(--hangman-b); }
+  50%     { box-shadow: 0 0 20px var(--hangman-a); }
+}
