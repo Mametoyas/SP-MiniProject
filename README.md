@@ -1,13 +1,26 @@
-# Mini Game Hub
-
-เว็บรวมเกมมินิ สไตล์ retro pixel art สร้างด้วย Python Flask + HTML/CSS/JS
+<div align="center">
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=4FC3F7&center=true&vCenter=true&width=500&lines=Welcome+to+OUR+GitHub!;Script+Programming+Mini Project;College+of+Computing" />
+</div>
 
 ---
 
-## โครงสร้างโปรเจกต์
+# Mini Game Hub
+Repository นี้จัดทำขึ้นเพื่อใช้สำหรับ **Mini Project** ในรายวิชาเท่านั้น
 
-```
-MiniProject/
+**รายวิชา:** Script Programming  ---  CP352301
+
+---
+
+## Student Information
+
+
+
+---
+
+## Project Structure
+
+```text
+SP - MiniProject/
 ├── app.py                  # Flask backend (API + routing)
 ├── requirements.txt        # Python dependencies
 ├── templates/
@@ -54,9 +67,9 @@ http://localhost:5000
 
 ---
 
-## 🕹️ เกมที่มี
+## เกมที่มี
 
-### ☠️ Hangman — Game Boy Edition
+### Hangman — Game Boy Edition
 > สไตล์ Game Boy สีเขียวพิกเซล
 
 **วิธีเล่น:**
@@ -72,51 +85,6 @@ http://localhost:5000
 |--------|----------|-----------|
 | POST | `/api/hangman/new` | เริ่มเกมใหม่ |
 | POST | `/api/hangman/guess` | ส่งตัวอักษรที่เดา `{ "letter": "a" }` |
-
----
-
-### 🔢 Number Guess *(Coming Soon)*
-> ทายตัวเลขที่ซ่อนอยู่ระหว่าง 1–100
-
-**วิธีเล่น:**
-- กดตัวเลขบน numpad แล้วกด **GUESS**
-- ระบบจะบอกว่าตัวเลขที่ทายสูงหรือต่ำกว่าคำตอบ
-- มีโอกาสทาย **10 ครั้ง**
-
-**API:**
-| Method | Endpoint | คำอธิบาย |
-|--------|----------|-----------|
-| POST | `/api/number-guess/new` | เริ่มเกมใหม่ |
-| POST | `/api/number-guess/guess` | ส่งตัวเลข `{ "number": 42 }` |
-
----
-
-### 🔤 Word Scramble *(Coming Soon)*
-> เรียงตัวอักษรที่สับเปลี่ยนให้เป็นคำที่ถูกต้อง
-
-**วิธีเล่น:**
-- ดูคำที่ถูกสับตัวอักษร แล้วพิมพ์คำที่ถูกต้องลงในช่อง
-- มีเวลา **30 วินาที** ต่อรอบ
-- กด **HINT** เพื่อเปิดเผยตัวอักษรแรก (เสียเวลา 5 วินาที)
-
-**API:**
-| Method | Endpoint | คำอธิบาย |
-|--------|----------|-----------|
-| POST | `/api/word-scramble/new` | เริ่มเกมใหม่ |
-| POST | `/api/word-scramble/guess` | ส่งคำตอบ `{ "word": "elephant" }` |
-| POST | `/api/word-scramble/hint` | ขอ hint |
-| POST | `/api/word-scramble/timeout` | แจ้งหมดเวลา |
-
----
-
-## 🛠️ Tech Stack
-
-| ส่วน | เทคโนโลยี |
-|------|-----------|
-| Backend | Python 3, Flask |
-| Frontend | HTML5, CSS3, Vanilla JS |
-| Font | Press Start 2P (Google Fonts) |
-| State | In-memory dict (server-side) |
 
 ---
 
