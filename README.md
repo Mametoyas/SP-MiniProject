@@ -51,8 +51,8 @@ Repository นี้จัดทำขึ้นเพื่อใช้สำห
   </tr>
   <tr>
     <td align="center">4</td>
-    <td>&lt;นางสาวทักษพร มูลมณี&gt;</td>
-    <td align="center">&lt;653380198-5&gt;</td>
+    <td>นางสาวทักษพร มูลมณี</td>
+    <td align="center">653380198-5</td>
     <td>Computer Science (CS)</td>
   </tr>
 </table>
