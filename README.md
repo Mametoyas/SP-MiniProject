@@ -45,9 +45,9 @@ Repository นี้จัดทำขึ้นเพื่อใช้สำห
   </tr>
   <tr>
     <td align="center">3</td>
-    <td>&lt;ชื่อ นามสกุล&gt;</td>
-    <td align="center">&lt;รหัสนักศึกษา&gt;</td>
-    <td>&lt;สาขาวิชา&gt;</td>
+    <td>นายพงษกร มานาดี</td>
+    <td align="center">663380282-7</td>
+    <td>Artificial Intelligence (AI)</td>
   </tr>
   <tr>
     <td align="center">4</td>
