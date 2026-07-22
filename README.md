@@ -62,20 +62,34 @@ Repository นี้จัดทำขึ้นเพื่อใช้สำห
 ## Project Structure
 
 ```text
-SP - MiniProject/
-├── app.py                  # Flask backend (API + routing)
-├── requirements.txt        # Python dependencies
+SP-MiniProject/
+├── app.py                      # Flask backend (API + routing)
+├── requirements.txt            # Python dependencies
 ├── templates/
-│   └── index.html          # หน้า Menu หลัก
+│   └── index.html              # หน้า Menu หลัก
 ├── static/
-│   ├── menu.css            # สไตล์หน้า Menu
-│   └── menu.js             # Boot screen animation
-└── games/
-    ├── hangman/            # เกม Hangman
-    │   ├── hangman.html
-    │   ├── hangman.css
-    │   └── hangman.js
-
+│   ├── menu.css
+│   └── menu.js
+├── games/
+│   └── hangman/                # เกม Hangman (frontend)
+│       ├── hangman.html
+│       ├── hangman.css
+│       └── hangman.js
+├── models/                     # โมเดล AI ที่เทรนแล้ว
+│   ├── hangman_best.pkl        # โมเดลที่ดีที่สุด (ใช้งานจริง)
+│   ├── hangman_tree.pkl
+│   ├── hangman_rf.pkl
+│   ├── hangman_lr.pkl
+│   └── hangman_nb.pkl
+├── datasets/
+│   └── model_comparison.csv    # ผลเปรียบเทียบโมเดล
+└── codes/                      # สคริปต์ AI
+    ├── words.txt               # คลังคำศัพท์ (animal / country / fruit)
+    ├── make_dataset.py         # สร้าง dataset จาก words.txt
+    ├── train_models.py         # เทรนโมเดลทั้ง 4 แบบ
+    ├── eval_models.py          # ประเมินและเลือกโมเดลที่ดีที่สุด
+    ├── predict.py              # ฟังก์ชัน predict ใช้งานจริง
+    └── test_ai.ipynb           # Notebook ทดสอบ AI
 ```
 
 ---
@@ -99,6 +113,67 @@ python app.py
 ```
 http://localhost:5000
 ```
+
+---
+
+## Hangman AI
+
+เกม Hangman ในโปรเจกต์นี้มี AI ช่วยแนะนำตัวอักษรที่ควรเดา โดยใช้ Machine Learning เทรนจากคลังคำศัพท์กว่า 1,000 คำ
+
+### AI Pipeline
+
+```
+words.txt  →  make_dataset.py  →  train_models.py  →  eval_models.py  →  hangman_best.pkl
+```
+
+| ขั้นตอน | ไฟล์ | คำอธิบาย |
+|---------|------|----------|
+| 1 | `make_dataset.py` | สร้าง dataset จาก words.txt โดย simulate ทุก state ของเกม |
+| 2 | `train_models.py` | เทรน 4 โมเดล (Decision Tree, Random Forest, Logistic Regression, Naive Bayes) |
+| 3 | `eval_models.py` | โหลดโมเดลที่เทรนแล้ว วัด top-1 / top-5 accuracy แล้วเลือกตัวที่ดีที่สุด |
+
+### วิธีเทรนโมเดล
+
+รันตามลำดับใน `codes/`
+
+```bash
+cd codes
+
+# 1. สร้าง dataset
+python make_dataset.py
+
+# 2. เทรนโมเดลทั้ง 4 แบบ → บันทึกใน models/
+python train_models.py
+
+# 3. ประเมินและบันทึก best model → models/hangman_best.pkl
+python eval_models.py
+```
+
+### วิธีใช้งาน AI ใน Code
+
+```python
+from predict import predict
+
+# predict(pattern, guessed, wrong) → list of 5 suggested letters
+suggestions = predict(
+    pattern = "e_e_h__t",
+    guessed = {"e", "h", "t"},
+    wrong   = {"a", "i"}
+)
+
+print(suggestions)  # ['l', 'p', 'n', 'r', 's']
+```
+
+| Parameter | Type | คำอธิบาย |
+|-----------|------|----------|
+| `pattern` | `str` | pattern ปัจจุบัน เช่น `"e_e_h__t"` (`_` = ยังไม่รู้) |
+| `guessed` | `set` | ตัวอักษรที่เดาถูกแล้ว |
+| `wrong` | `set` | ตัวอักษรที่เดาผิดแล้ว |
+| return | `list[str]` | top-5 ตัวอักษรที่แนะนำ |
+
+### ทดสอบ AI
+
+เปิด `codes/test_ai.ipynb` ใน Jupyter แล้วรันทีละ cell
 
 ---
 
