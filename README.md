@@ -63,7 +63,7 @@ Repository นี้จัดทำขึ้นเพื่อใช้สำห
 
 ```text
 SP-MiniProject/
-├── app.py                      # Flask backend (API + routing)
+├── app.py                      # Flask entry point (routing + blueprints)
 ├── requirements.txt            # Python dependencies
 ├── templates/
 │   └── index.html              # หน้า Menu หลัก
@@ -71,25 +71,31 @@ SP-MiniProject/
 │   ├── menu.css
 │   └── menu.js
 ├── games/
-│   └── hangman/                # เกม Hangman (frontend)
-│       ├── hangman.html
+│   └── hangman/                # เกม Hangman (frontend + blueprint)
+│       ├── hangman.py          # Flask blueprint (API)
+│       ├── hangman.html        # Classic mode UI
 │       ├── hangman.css
-│       └── hangman.js
-├── models/                     # โมเดล AI ที่เทรนแล้ว
-│   ├── hangman_best.pkl        # โมเดลที่ดีที่สุด (ใช้งานจริง)
-│   ├── hangman_tree.pkl
-│   ├── hangman_rf.pkl
-│   ├── hangman_lr.pkl
-│   └── hangman_nb.pkl
+│       ├── hangman.js
+│       ├── hangman_ai.html     # AI Assist / VS AI mode UI
+│       ├── hangman_ai.css
+│       └── hangman_ai.js
+├── models/
+│   ├── hangman_tree.pkl        # Decision Tree (ใช้งานจริง)
+│   ├── hangman_lr.pkl          # Logistic Regression (offline)
+│   └── hangman_nb.pkl          # Naive Bayes (offline)
 ├── datasets/
-│   └── model_comparison.csv    # ผลเปรียบเทียบโมเดล
-└── codes/                      # สคริปต์ AI
-    ├── words.txt               # คลังคำศัพท์ (animal / country / fruit)
+│   ├── words.txt               # คลังคำศัพท์ (animal / country / fruit)
+│   ├── hangman_dataset.csv     # Dataset ที่สร้างจาก words.txt
+│   └── model_comparison.csv   # ผลเปรียบเทียบโมเดล
+└── codes/                      # Offline AI pipeline scripts
+    ├── predict.py              # ฟังก์ชัน predict (ใช้งานจริง)
     ├── make_dataset.py         # สร้าง dataset จาก words.txt
-    ├── train_models.py         # เทรนโมเดลทั้ง 4 แบบ
-    ├── eval_models.py          # ประเมินและเลือกโมเดลที่ดีที่สุด
-    ├── predict.py              # ฟังก์ชัน predict ใช้งานจริง
-    └── test_ai.ipynb           # Notebook ทดสอบ AI
+    ├── train_models.py         # เทรนโมเดลทั้ง 3 แบบ
+    ├── eval_models.py          # ประเมินและเปรียบเทียบโมเดล
+    ├── generate_words.py       # สร้าง/จัดการ words.txt
+    ├── Hangman_AI.ipynb        # Notebook ทดสอบ AI pipeline
+    ├── Hangman.ipynb           # Notebook ทดสอบเกม Hangman
+    └── test_ai.ipynb           # Notebook ทดสอบ predict()
 ```
 
 ---
@@ -118,41 +124,34 @@ http://localhost:5000
 
 ## Hangman AI
 
-เกม Hangman ในโปรเจกต์นี้มี AI ช่วยแนะนำตัวอักษรที่ควรเดา โดยใช้ Machine Learning เทรนจากคลังคำศัพท์กว่า 1,000 คำ
+เกม Hangman ในโปรเจกต์นี้มี AI ช่วยแนะนำตัวอักษรที่ควรเดา โดยใช้ Decision Tree เทรนจากคลังคำศัพท์กว่า 1,000 คำ
 
-### AI Pipeline
+### AI Pipeline (Offline)
 
 ```
-words.txt  →  make_dataset.py  →  train_models.py  →  eval_models.py  →  hangman_best.pkl
+words.txt  →  make_dataset.py  →  train_models.py  →  eval_models.py  →  hangman_tree.pkl
 ```
 
 | ขั้นตอน | ไฟล์ | คำอธิบาย |
 |---------|------|----------|
 | 1 | `make_dataset.py` | สร้าง dataset จาก words.txt โดย simulate ทุก state ของเกม |
-| 2 | `train_models.py` | เทรน 4 โมเดล (Decision Tree, Random Forest, Logistic Regression, Naive Bayes) |
-| 3 | `eval_models.py` | โหลดโมเดลที่เทรนแล้ว วัด top-1 / top-5 accuracy แล้วเลือกตัวที่ดีที่สุด |
+| 2 | `train_models.py` | เทรน 3 โมเดล (Decision Tree, Logistic Regression, Naive Bayes) |
+| 3 | `eval_models.py` | วัด top-1 / top-5 accuracy และเปรียบเทียบโมเดล |
 
-### วิธีเทรนโมเดล
-
-รันตามลำดับใน `codes/`
+### วิธีเทรนโมเดล (ถ้าต้องการ retrain)
 
 ```bash
 cd codes
 
-# 1. สร้าง dataset
 python make_dataset.py
-
-# 2. เทรนโมเดลทั้ง 4 แบบ → บันทึกใน models/
 python train_models.py
-
-# 3. ประเมินและบันทึก best model → models/hangman_best.pkl
 python eval_models.py
 ```
 
 ### วิธีใช้งาน AI ใน Code
 
 ```python
-from predict import predict
+from codes.predict import predict
 
 # predict(pattern, guessed, wrong) → list of 5 suggested letters
 suggestions = predict(
@@ -171,20 +170,16 @@ print(suggestions)  # ['l', 'p', 'n', 'r', 's']
 | `wrong` | `set` | ตัวอักษรที่เดาผิดแล้ว |
 | return | `list[str]` | top-5 ตัวอักษรที่แนะนำ |
 
-### ทดสอบ AI
-
-เปิด `codes/test_ai.ipynb` ใน Jupyter แล้วรันทีละ cell
-
 ---
 
 ## เกมที่มี
 
-### Hangman — Game Boy Edition
+### Hangman — Classic Mode
 
 > สไตล์ Game Boy สีเขียวพิกเซล
 
 **วิธีเล่น:**
-- กด **PLAY** ที่หน้า Menu เพื่อเข้าเกม
+- กด **HANGMAN** ที่หน้า Menu เพื่อเข้าเกม
 - เดาตัวอักษรทีละตัวโดยกดปุ่มบน keyboard บนหน้าจอ
 - มีชีวิต **6 ครั้ง** — เดาผิดแต่ละครั้งจะวาดร่างคนแขวนคอเพิ่มขึ้น
 - เดาถูกทุกตัวก่อนหมดชีวิต = **ชนะ!**
@@ -200,35 +195,48 @@ print(suggestions)  # ['l', 'p', 'n', 'r', 's']
 
 ---
 
-### Hangman AI — 3 Modes (`games/Hangman_AI.ipynb`)
+### Hangman — AI Assist Mode
 
-เกม Hangman บน Jupyter Notebook ที่ใช้ AI จาก `hangman_best.pkl` มี 3 โหมด
-
-**Mode 1 — AI Assist**
 - ผู้เล่นเดาตัวอักษรเอง
-- ก่อนทุก turn AI จะแสดง top-5 ตัวอักษรที่แนะนำ
+- AI แสดง top-5 ตัวอักษรที่แนะนำก่อนทุก turn
 - ผู้เล่นตัดสินใจเองว่าจะเดาตามหรือไม่
-- เหมาะสำหรับผู้เล่นที่ต้องการคำใบ้
 
-**Mode 2 — AI Opponent**
-- AI เล่นคนเดียวทั้งหมด ผู้เล่นแค่กด Enter ดูทีละ step
-- สามารถกำหนดคำเองได้ หรือปล่อยให้สุ่มอัตโนมัติ
-- เหมาะสำหรับทดสอบว่า AI เก่งแค่ไหน
+**เข้าเกม:** กด **AI ASSIST** ที่หน้า Menu
 
-**Mode 3 — VS AI**
-- ผู้เล่นตั้งคำให้ AI เดา และ AI สุ่มคำให้ผู้เล่นเดา (คนละคำ)
-- สลับ turn กันไปเรื่อยๆ — ผู้เล่น 1 turn → AI 1 turn
-- ใครผิดครบ 6 ครั้งก่อน = แพ้
+**API:**
 
-| โหมด | ผู้เล่น | AI | เป้าหมาย |
-|------|---------|-----|----------|
-| AI Assist | เดาเอง | แนะนำ top-5 | ผู้เล่นชนะเกม |
-| AI Opponent | ดู | เล่นคนเดียว | ทดสอบความแม่นของ AI |
-| VS AI | เดาคำของ AI | เดาคำของผู้เล่น | ใครผิดครบ 6 ก่อน = แพ้ |
+| Method | Endpoint | คำอธิบาย |
+|:------:|----------|-----------|
+| `POST` | `/api/hangman/new` | เริ่มเกมใหม่ (mode=assist) |
+| `POST` | `/api/hangman/guess` | ส่งตัวอักษรที่เดา — response มี `suggestions` |
+
+---
+
+### Hangman — VS AI Mode
+
+- ผู้เล่นและ AI ได้คำเดียวกัน สลับ turn กัน
+- ผู้เล่น 1 turn → AI 1 turn ไปเรื่อยๆ
+- ใครผิดครบ 6 ครั้งก่อน = **แพ้**
+
+**เข้าเกม:** กด **VS AI** ที่หน้า Menu
+
+**API:**
+
+| Method | Endpoint | คำอธิบาย |
+|:------:|----------|-----------|
+| `POST` | `/api/hangman/new` | เริ่มเกมใหม่ (mode=vs) |
+| `POST` | `/api/hangman/guess` | ส่งตัวอักษร — response มีผล turn ของ AI ด้วย |
+
+| สถานะ | ความหมาย |
+|-------|----------|
+| `player_win` | ผู้เล่นเดาถูกทุกตัว |
+| `player_lose` | ผู้เล่นผิดครบ 6 ครั้ง |
+| `ai_win` | AI เดาถูกทุกตัว |
+| `ai_lose` | AI ผิดครบ 6 ครั้ง |
 
 ---
 
 ## หมายเหตุ
 
 > Game state เก็บใน memory — รีเซ็ตเมื่อ restart server  
-> แต่ละเกมมี CSS แยกกันอิสระ ทีมสามารถแก้สไตล์ได้โดยไม่กระทบกัน
+> แต่ละโหมดมี CSS แยกกันอิสระ แก้สไตล์ได้โดยไม่กระทบกัน
