@@ -6,7 +6,7 @@ import pandas as pd
 # Load Model & Words
 # ============================================
 
-model = joblib.load("../models/hangman_best.pkl")
+model = joblib.load("../models/hangman_tree.pkl")
 
 with open("../datasets/words.txt", encoding="utf8") as f:
     words = [w.strip().lower() for w in f if w.strip().isalpha()]
