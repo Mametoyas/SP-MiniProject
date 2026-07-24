@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANGMAN AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/games/hangman/hangman.css">
+  <link rel="stylesheet" href="/games/hangman/hangman_ai.css">
+</head>
+<body>
+
+  <a class="back-btn" href="/">◀ MENU</a>
+
+  <h1>☠ HANGMAN AI ☠</h1>
+  <p class="subtitle">GAME BOY EDITION</p>
+
+  <!-- Mode Select -->
+  <div id="mode-select" class="game-container">
+    <div class="pixel-box" style="text-align:center; padding: 24px 16px; gap: 16px; display:flex; flex-direction:column; align-items:center;">
+      <div style="font-size:9px; color:var(--gb-light); margin-bottom:8px;">SELECT MODE / เลือกโหมด</div>
+      <button class="btn" onclick="initGame('assist')">🤖 AI ASSIST<br><span style="font-size:6px; color:var(--gb-light);">AI แนะนำ top-5 ทุก turn</span></button>
+      <button class="btn" onclick="initGame('vs')">⚔ VS AI<br><span style="font-size:6px; color:var(--gb-light);">สลับ turn กับ AI</span></button>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="game-screen" class="hidden">
+
+    <!-- ASSIST layout -->
+    <div id="layout-assist" class="hidden game-container">
+      <div class="info-row">
+        <div id="assist-category">CATEGORY: —</div>
+        <div class="lives-hearts" id="assist-hearts"></div>
+      </div>
+      <div class="mid-row">
+        <div class="pixel-box hangman-box">
+          <svg id="assist-svg" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+            <line x1="20" y1="170" x2="160" y2="170"/>
+            <line x1="60" y1="170" x2="60"  y2="10"/>
+            <line x1="60" y1="10"  x2="120" y2="10"/>
+            <line x1="120" y1="10" x2="120" y2="35"/>
+            <circle class="part" id="as-head" cx="120" cy="50"  r="15"/>
+            <line   class="part" id="as-body" x1="120" y1="65"  x2="120" y2="110"/>
+            <line   class="part" id="as-larm" x1="120" y1="75"  x2="95"  y2="95"/>
+            <line   class="part" id="as-rarm" x1="120" y1="75"  x2="145" y2="95"/>
+            <line   class="part" id="as-lleg" x1="120" y1="110" x2="95"  y2="140"/>
+            <line   class="part" id="as-rleg" x1="120" y1="110" x2="145" y2="140"/>
+          </svg>
+        </div>
+        <div class="pixel-box wrong-box">
+          <div>
+            <div class="wrong-label">WRONG LETTERS<br>ตัวที่เดาผิด</div>
+            <div class="wrong-letters" id="assist-wrong">—</div>
+          </div>
+          <div>
+            <div class="wrong-label">🤖 AI HINT</div>
+            <div class="hint-letters" id="assist-hints" style="font-size:9px">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="pixel-box">
+        <div class="word-row" id="assist-word"></div>
+      </div>
+      <div class="pixel-box">
+        <div class="keyboard" id="assist-keyboard"></div>
+      </div>
+    </div>
+
+    <!-- VS layout -->
+    <div id="layout-vs" class="hidden">
+      <div class="vs-boards">
+
+        <!-- Player board -->
+        <div class="vs-side" id="vs-player-side">
+          <div class="vs-label">👤 YOU</div>
+          <div class="info-row" style="max-width:100%">
+            <div id="vs-p-category" style="font-size:7px">CATEGORY: —</div>
+            <div class="lives-hearts" id="vs-p-hearts"></div>
+          </div>
+          <div class="pixel-box hangman-box">
+            <svg id="vs-p-svg" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="170" x2="160" y2="170"/>
+              <line x1="60" y1="170" x2="60"  y2="10"/>
+              <line x1="60" y1="10"  x2="120" y2="10"/>
+              <line x1="120" y1="10" x2="120" y2="35"/>
+              <circle class="part" id="vp-head" cx="120" cy="50"  r="15"/>
+              <line   class="part" id="vp-body" x1="120" y1="65"  x2="120" y2="110"/>
+              <line   class="part" id="vp-larm" x1="120" y1="75"  x2="95"  y2="95"/>
+              <line   class="part" id="vp-rarm" x1="120" y1="75"  x2="145" y2="95"/>
+              <line   class="part" id="vp-lleg" x1="120" y1="110" x2="95"  y2="140"/>
+              <line   class="part" id="vp-rleg" x1="120" y1="110" x2="145" y2="140"/>
+            </svg>
+          </div>
+          <div class="pixel-box" style="margin-top:8px">
+            <div class="word-row" id="vs-p-word"></div>
+          </div>
+          <div class="pixel-box" style="margin-top:8px; text-align:center; padding:8px">
+            <div class="wrong-label">WRONG</div>
+            <div class="wrong-letters" id="vs-p-wrong">—</div>
+          </div>
+        </div>
+
+        <!-- VS divider -->
+        <div class="vs-divider">VS</div>
+
+        <!-- AI board -->
+        <div class="vs-side" id="vs-ai-side">
+          <div class="vs-label">🤖 AI</div>
+          <div class="info-row" style="max-width:100%">
+            <div id="vs-a-category" style="font-size:7px">CATEGORY: —</div>
+            <div class="lives-hearts" id="vs-a-hearts"></div>
+          </div>
+          <div class="pixel-box hangman-box">
+            <svg id="vs-a-svg" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+              <line x1="20" y1="170" x2="160" y2="170"/>
+              <line x1="60" y1="170" x2="60"  y2="10"/>
+              <line x1="60" y1="10"  x2="120" y2="10"/>
+              <line x1="120" y1="10" x2="120" y2="35"/>
+              <circle class="part" id="va-head" cx="120" cy="50"  r="15"/>
+              <line   class="part" id="va-body" x1="120" y1="65"  x2="120" y2="110"/>
+              <line   class="part" id="va-larm" x1="120" y1="75"  x2="95"  y2="95"/>
+              <line   class="part" id="va-rarm" x1="120" y1="75"  x2="145" y2="95"/>
+              <line   class="part" id="va-lleg" x1="120" y1="110" x2="95"  y2="140"/>
+              <line   class="part" id="va-rleg" x1="120" y1="110" x2="145" y2="140"/>
+            </svg>
+          </div>
+          <div class="pixel-box" style="margin-top:8px">
+            <div class="word-row" id="vs-a-word"></div>
+          </div>
+          <div class="pixel-box" style="margin-top:8px; text-align:center; padding:8px">
+            <div class="wrong-label">WRONG</div>
+            <div class="wrong-letters" id="vs-a-wrong">—</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Turn indicator -->
+      <div class="pixel-box turn-box" id="vs-turn-box">
+        <div id="vs-turn-label">YOUR TURN</div>
+      </div>
+
+      <!-- Player keyboard -->
+      <div class="pixel-box" style="margin-top:8px; width:100%; max-width:560px">
+        <div style="font-size:7px; color:var(--gb-light); text-align:center; margin-bottom:8px;">YOUR KEYBOARD</div>
+        <div class="keyboard" id="vs-p-keyboard"></div>
+      </div>
+
+      <!-- AI guessed display -->
+      <div class="pixel-box" style="margin-top:8px; width:100%; max-width:560px; text-align:center; padding:10px 16px;">
+        <div class="hint-label">🤖 AI GUESSED</div>
+        <div class="hint-letters" id="vs-a-guessed-display" style="font-size:9px; letter-spacing:4px; color:var(--gb-light);">—</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Win / Lose overlay -->
+  <div id="message-overlay">
+    <div id="message-title"></div>
+    <div id="message-word"></div>
+    <button class="btn" id="play-again-btn">▶ PLAY AGAIN</button>
+    <button class="btn" id="change-mode-btn" style="font-size:7px">◀ CHANGE MODE</button>
+  </div>
+
+  <script src="/games/hangman/hangman_ai.js"></script>
+</body>
+</html>

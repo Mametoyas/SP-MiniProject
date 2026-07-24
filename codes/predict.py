@@ -1,14 +1,17 @@
 import string
 import joblib
 import pandas as pd
+from pathlib import Path
 
 # ============================================
 # Load Model & Words
 # ============================================
 
-model = joblib.load("../models/hangman_tree.pkl")
+_BASE = Path(__file__).resolve().parent.parent
 
-with open("../datasets/words.txt", encoding="utf8") as f:
+model = joblib.load(_BASE / "models" / "hangman_tree.pkl")
+
+with open(_BASE / "datasets" / "words.txt", encoding="utf8") as f:
     words = [w.strip().lower() for w in f if w.strip().isalpha()]
 
 words_by_length = {}

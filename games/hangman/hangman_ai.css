@@ -1,0 +1,140 @@
+/* ═══════════════════════════════════════════
+   hangman_ai.css — AI Edition extras
+   ═══════════════════════════════════════════ */
+
+/* ── Mode select buttons ────────────────── */
+#mode-select .btn {
+  width: 100%;
+  max-width: 280px;
+  padding: 14px 20px;
+  line-height: 2.2;
+}
+
+/* ── AI Hint bar ────────────────────────── */
+.hint-box {
+  text-align: center;
+  padding: 10px 16px;
+}
+
+.hint-label {
+  font-size:     7px;
+  color:         var(--gb-light);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.hint-letters {
+  font-size:      11px;
+  color:          #f0c040;
+  letter-spacing: 6px;
+  text-shadow:    0 0 8px #f0c040;
+}
+
+/* ── VS layout ──────────────────────────── */
+.vs-boards {
+  display:     flex;
+  gap:         12px;
+  width:       100%;
+  max-width:   700px;
+  align-items: flex-start;
+}
+
+.vs-side {
+  flex: 1;
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+}
+
+.vs-side .pixel-box {
+  width: 100%;
+}
+
+.vs-side .hangman-box svg {
+  width:  140px;
+  height: 140px;
+}
+
+#assist-svg {
+  width:  180px;
+  height: 180px;
+}
+
+#assist-svg line,
+#assist-svg circle,
+#assist-svg path {
+  stroke:         var(--gb-lightest);
+  stroke-width:   4;
+  stroke-linecap: square;
+  fill:           none;
+  filter:         drop-shadow(0 0 4px var(--gb-light));
+}
+
+.vs-side .hangman-box svg line,
+.vs-side .hangman-box svg circle,
+.vs-side .hangman-box svg path {
+  stroke:         var(--gb-lightest);
+  stroke-width:   4;
+  stroke-linecap: square;
+  fill:           none;
+  filter:         drop-shadow(0 0 4px var(--gb-light));
+}
+
+.vs-label {
+  font-size:     9px;
+  color:         var(--gb-lightest);
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+
+.vs-divider {
+  font-size:   14px;
+  color:       var(--gb-dark);
+  align-self:  center;
+  padding:     0 4px;
+  flex-shrink: 0;
+}
+
+/* ── Turn indicator ─────────────────────── */
+.turn-box {
+  text-align:  center;
+  padding:     10px;
+  margin-top:  8px;
+  width:       100%;
+  max-width:   700px;
+}
+
+#vs-turn-label {
+  font-size:      9px;
+  color:          var(--gb-lightest);
+  letter-spacing: 2px;
+  animation:      blink 1s step-end infinite;
+}
+
+/* ── Active / inactive side ─────────────── */
+.vs-side.inactive {
+  opacity: 0.45;
+}
+
+/* ── AI last guess badge ────────────────── */
+.ai-guess-badge {
+  font-size:   8px;
+  color:       #f0c040;
+  text-shadow: 0 0 6px #f0c040;
+  margin-top:  4px;
+  min-height:  14px;
+  text-align:  center;
+}
+
+/* ── Assist wrong-box — match hangman height ── */
+#layout-assist .wrong-box {
+  display:        flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding:    10px 16px;
+
+}
+
+/* ── Utility ────────────────────────────── */
+.hidden { display: none !important; }
