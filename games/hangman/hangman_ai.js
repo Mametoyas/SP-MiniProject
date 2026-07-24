@@ -251,40 +251,43 @@ function handleVSResult(state, ch, btn) {
   updateHangman(PARTS.vsp, p.wrong_count);
   updateWrong("vs-p-wrong", p.wrong);
 
-  // AI result
-  if (state.ai_letter) {
-    const aiLetter = state.ai_letter;
-    setTimeout(() => {
-      if (state.ai_result === "correct") {
-        a.masked_word.forEach((letter, i) => {
-          if (letter === aiLetter) {
-            const slot = document.getElementById(`vs-a-word-slot-${i}`);
-            if (slot) { slot.textContent = aiLetter.toUpperCase(); slot.classList.add("revealed"); }
-          }
-        });
-      }
-      updateHearts("vs-a-hearts", a.wrong_count);
-      updateHangman(PARTS.vsa, a.wrong_count);
-      updateWrong("vs-a-wrong", a.wrong);
-      updateAIGuessedDisplay(a.guessed);  // แสดงตัวที่ AI เดาไปแล้ว ไม่แตะ keyboard player
-
-      if (state.status === "playing") updateTurnUI("player");
-      guessing = false;
-    }, 600);
-  } else {
-    guessing = false;
-  }
-
-  // end game check
+  // end game check (player result — no AI turn needed)
   const endMap = {
     player_win:  "win",
     player_lose: "lose",
     ai_win:      "ai_win",
     ai_lose:     "ai_lose",
   };
-  if (endMap[state.status]) {
-    setTimeout(() => endGame(state, endMap[state.status]), 800);
+
+  if (!state.ai_letter) {
+    guessing = false;
+    if (endMap[state.status]) setTimeout(() => endGame(state, endMap[state.status]), 400);
+    return;
   }
+
+  // AI result
+  const aiLetter = state.ai_letter;
+  setTimeout(() => {
+    if (state.ai_result === "correct") {
+      a.masked_word.forEach((letter, i) => {
+        if (letter === aiLetter) {
+          const slot = document.getElementById(`vs-a-word-slot-${i}`);
+          if (slot) { slot.textContent = aiLetter.toUpperCase(); slot.classList.add("revealed"); }
+        }
+      });
+    }
+    updateHearts("vs-a-hearts", a.wrong_count);
+    updateHangman(PARTS.vsa, a.wrong_count);
+    updateWrong("vs-a-wrong", a.wrong);
+    updateAIGuessedDisplay(a.guessed);
+
+    if (endMap[state.status]) {
+      setTimeout(() => endGame(state, endMap[state.status]), 400);
+    } else {
+      updateTurnUI("player");
+    }
+    guessing = false;
+  }, 600);
 }
 
 // ── End game ──────────────────────────────────────────────────────────────────
@@ -307,14 +310,13 @@ function endGame(state, result) {
 
   if (currentMode === "assist") {
     const answer = state.player.answer || "";
-    wordEl.innerHTML = `คำตอบคือ / The word was:<br>"${answer.toUpperCase()}"`;
+    wordEl.innerHTML = `The word is: <b>${answer.toUpperCase()}</b>`;
     if (result === "lose") renderWord("assist-word", answer.split(""));
   } else {
-    const pa = state.player.answer || "", aa = state.ai?.answer || "";
-    wordEl.innerHTML =
-      `Your word: <b>${pa.toUpperCase()}</b><br>AI's word: <b>${aa.toUpperCase()}</b>`;
+    const pa = state.player.answer || "";
+    wordEl.innerHTML = `The word is: <b>${pa.toUpperCase()}</b>`;
     if (result === "lose" || result === "ai_win") renderWord("vs-p-word", pa.split(""));
-    if (result === "ai_lose")                     renderWord("vs-a-word", aa.split(""));
+    if (result === "ai_lose") renderWord("vs-a-word", (state.ai?.answer || "").split(""));
   }
 
   document.getElementById("message-overlay").classList.add("show");
@@ -337,11 +339,5 @@ document.getElementById("play-again-btn").addEventListener("click", () => {
 });
 
 document.getElementById("change-mode-btn").addEventListener("click", () => {
-  document.getElementById("message-overlay").classList.remove("show");
-  document.getElementById("game-screen").classList.add("hidden");
-  document.getElementById("layout-assist").classList.add("hidden");
-  document.getElementById("layout-vs").classList.add("hidden");
-  document.getElementById("mode-select").classList.remove("hidden");
-  Object.values(PARTS).flat().forEach(id => document.getElementById(id)?.classList.remove("show"));
-  currentMode = null;
+  location.href = "/";
 });

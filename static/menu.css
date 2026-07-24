@@ -188,7 +188,7 @@ h1 {
 }
 
 /* ── Hangman card ───────────────────────────── */
-.card-hangman { border-color: var(--hangman-b); }
+/* .card-hangman { border-color: var(--hangman-b); } */
 .card-hangman .card-glow { background: var(--hangman-a); }
 .card-hangman .card-icon { color: var(--hangman-a); text-shadow: 0 0 12px var(--hangman-a); }
 .card-hangman .card-title { color: var(--hangman-a); }
@@ -205,13 +205,33 @@ h1 {
 
 /* ── Number card ────────────────────────────── */
 .card-number { border-color: #2a2a3a; }
-.card-number .card-icon { color: var(--number-a); }
+.card-number .card-glow { background: var(--number-a); }
+.card-number .card-icon { color: var(--number-a); text-shadow: 0 0 12px var(--number-a); }
 .card-number .card-title { color: var(--number-a); }
+
+.card-number:hover {
+  transform:    translateY(-6px);
+  border-color: var(--number-a);
+  box-shadow:   0 0 24px var(--number-b), 0 8px 32px rgba(0,0,0,0.6);
+}
+.card-number:hover .card-glow { opacity: 0.35; }
+.card-number:hover .card-icon { transform: scale(1.15) rotate(-5deg); }
+.card-number:active { transform: translateY(-2px); }
 
 /* ── Scramble card ──────────────────────────── */
 .card-scramble { border-color: #2a2a3a; }
-.card-scramble .card-icon { color: var(--scramble-a); }
+.card-scramble .card-glow { background: var(--scramble-a); }
+.card-scramble .card-icon { color: var(--scramble-a); text-shadow: 0 0 12px var(--scramble-a); }
 .card-scramble .card-title { color: var(--scramble-a); }
+
+.card-scramble:hover {
+  transform:    translateY(-6px);
+  border-color: var(--scramble-a);
+  box-shadow:   0 0 24px var(--scramble-b), 0 8px 32px rgba(0,0,0,0.6);
+}
+.card-scramble:hover .card-glow { opacity: 0.35; }
+.card-scramble:hover .card-icon { transform: scale(1.15) rotate(-5deg); }
+.card-scramble:active { transform: translateY(-2px); }
 
 /* ── Locked state ───────────────────────────── */
 .locked { cursor: not-allowed; }

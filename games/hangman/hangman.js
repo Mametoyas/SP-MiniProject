@@ -231,6 +231,7 @@ document.addEventListener("keydown", e => {
 });
 
 document.getElementById("play-again-btn").addEventListener("click", startGame);
+document.getElementById("change-mode-btn").addEventListener("click", () => { location.href = "/"; });
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 
