@@ -87,152 +87,71 @@ SP-MiniProject/
 │   ├── words.txt               # คลังคำศัพท์ (animal / country / fruit)
 │   ├── hangman_dataset.csv     # Dataset ที่สร้างจาก words.txt
 │   └── model_comparison.csv   # ผลเปรียบเทียบโมเดล
-└── codes/                      # Offline AI pipeline scripts
-    ├── predict.py              # ฟังก์ชัน predict (ใช้งานจริง)
-    ├── make_dataset.py         # สร้าง dataset จาก words.txt
-    ├── train_models.py         # เทรนโมเดลทั้ง 3 แบบ
-    ├── eval_models.py          # ประเมินและเปรียบเทียบโมเดล
-    ├── generate_words.py       # สร้าง/จัดการ words.txt
-    ├── Hangman_AI.ipynb        # Notebook ทดสอบ AI pipeline
-    ├── Hangman.ipynb           # Notebook ทดสอบเกม Hangman
-    └── test_ai.ipynb           # Notebook ทดสอบ predict()
+├── codes/                      # Offline AI pipeline scripts
+│   ├── predict.py              # ฟังก์ชัน predict (ใช้งานจริง)
+│   ├── make_dataset.py
+│   ├── train_models.py
+│   ├── eval_models.py
+│   ├── generate_words.py
+│   ├── Hangman_AI.ipynb
+│   ├── Hangman.ipynb
+│   └── test_ai.ipynb
+└── docs/
+    ├── HANGMAN_AI.md           # AI pipeline & predict()
+    └── GAMEPLAY.md             # วิธีเล่นแต่ละโหมด & API
 ```
 
 ---
 
 ## วิธีติดตั้งและรัน
 
-**1. ติดตั้ง dependencies**
+**1. สร้าง Virtual Environment**
+
+```bash
+python -m venv venv
+```
+
+**2. Activate Virtual Environment**
+
+```bash
+# Windows
+venv\Scripts\activate
+
+# macOS / Linux
+source venv/bin/activate
+```
+
+> ถ้า activate สำเร็จ จะเห็น `(venv)` นำหน้า prompt
+
+**3. ติดตั้ง dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**2. รัน Flask server**
+**4. รัน Flask server**
 
 ```bash
 python app.py
 ```
 
-**3. เปิดเบราว์เซอร์**
+**5. เปิดเบราว์เซอร์**
 
 ```
 http://localhost:5000
 ```
 
----
-
-## Hangman AI
-
-เกม Hangman ในโปรเจกต์นี้มี AI ช่วยแนะนำตัวอักษรที่ควรเดา โดยใช้ Decision Tree เทรนจากคลังคำศัพท์กว่า 1,000 คำ
-
-### AI Pipeline (Offline)
-
-```
-words.txt  →  make_dataset.py  →  train_models.py  →  eval_models.py  →  hangman_tree.pkl
-```
-
-| ขั้นตอน | ไฟล์ | คำอธิบาย |
-|---------|------|----------|
-| 1 | `make_dataset.py` | สร้าง dataset จาก words.txt โดย simulate ทุก state ของเกม |
-| 2 | `train_models.py` | เทรน 3 โมเดล (Decision Tree, Logistic Regression, Naive Bayes) |
-| 3 | `eval_models.py` | วัด top-1 / top-5 accuracy และเปรียบเทียบโมเดล |
-
-### วิธีเทรนโมเดล (ถ้าต้องการ retrain)
-
-```bash
-cd codes
-
-python make_dataset.py
-python train_models.py
-python eval_models.py
-```
-
-### วิธีใช้งาน AI ใน Code
-
-```python
-from codes.predict import predict
-
-# predict(pattern, guessed, wrong) → list of 5 suggested letters
-suggestions = predict(
-    pattern = "e_e_h__t",
-    guessed = {"e", "h", "t"},
-    wrong   = {"a", "i"}
-)
-
-print(suggestions)  # ['l', 'p', 'n', 'r', 's']
-```
-
-| Parameter | Type | คำอธิบาย |
-|-----------|------|----------|
-| `pattern` | `str` | pattern ปัจจุบัน เช่น `"e_e_h__t"` (`_` = ยังไม่รู้) |
-| `guessed` | `set` | ตัวอักษรที่เดาถูกแล้ว |
-| `wrong` | `set` | ตัวอักษรที่เดาผิดแล้ว |
-| return | `list[str]` | top-5 ตัวอักษรที่แนะนำ |
+> ออกจาก env เมื่อเลิกใช้งานด้วย `deactivate`
 
 ---
 
-## เกมที่มี
+## เอกสารเพิ่มเติม
 
-### Hangman — Classic Mode
-
-> สไตล์ Game Boy สีเขียวพิกเซล
-
-**วิธีเล่น:**
-- กด **HANGMAN** ที่หน้า Menu เพื่อเข้าเกม
-- เดาตัวอักษรทีละตัวโดยกดปุ่มบน keyboard บนหน้าจอ
-- มีชีวิต **6 ครั้ง** — เดาผิดแต่ละครั้งจะวาดร่างคนแขวนคอเพิ่มขึ้น
-- เดาถูกทุกตัวก่อนหมดชีวิต = **ชนะ!**
-
-**หมวดคำ:** สัตว์ / ผลไม้ / ประเทศ (สุ่มอัตโนมัติ)
-
-**API:**
-
-| Method | Endpoint | คำอธิบาย |
-|:------:|----------|-----------|
-| `POST` | `/api/hangman/new` | เริ่มเกมใหม่ |
-| `POST` | `/api/hangman/guess` | ส่งตัวอักษรที่เดา `{ "letter": "a" }` |
-
----
-
-### Hangman — AI Assist Mode
-
-- ผู้เล่นเดาตัวอักษรเอง
-- AI แสดง top-5 ตัวอักษรที่แนะนำก่อนทุก turn
-- ผู้เล่นตัดสินใจเองว่าจะเดาตามหรือไม่
-
-**เข้าเกม:** กด **AI ASSIST** ที่หน้า Menu
-
-**API:**
-
-| Method | Endpoint | คำอธิบาย |
-|:------:|----------|-----------|
-| `POST` | `/api/hangman/new` | เริ่มเกมใหม่ (mode=assist) |
-| `POST` | `/api/hangman/guess` | ส่งตัวอักษรที่เดา — response มี `suggestions` |
-
----
-
-### Hangman — VS AI Mode
-
-- ผู้เล่นและ AI ได้คำเดียวกัน สลับ turn กัน
-- ผู้เล่น 1 turn → AI 1 turn ไปเรื่อยๆ
-- ใครผิดครบ 6 ครั้งก่อน = **แพ้**
-
-**เข้าเกม:** กด **VS AI** ที่หน้า Menu
-
-**API:**
-
-| Method | Endpoint | คำอธิบาย |
-|:------:|----------|-----------|
-| `POST` | `/api/hangman/new` | เริ่มเกมใหม่ (mode=vs) |
-| `POST` | `/api/hangman/guess` | ส่งตัวอักษร — response มีผล turn ของ AI ด้วย |
-
-| สถานะ | ความหมาย |
-|-------|----------|
-| `player_win` | ผู้เล่นเดาถูกทุกตัว |
-| `player_lose` | ผู้เล่นผิดครบ 6 ครั้ง |
-| `ai_win` | AI เดาถูกทุกตัว |
-| `ai_lose` | AI ผิดครบ 6 ครั้ง |
+| หัวข้อ | ไฟล์ |
+|--------|------|
+| Quick Start — ติดตั้งและรันแบบเร็ว | [docs/QUICKSTART.md](docs/QUICKSTART.md) |
+| Hangman AI — pipeline & predict() | [docs/HANGMAN_AI.md](docs/HANGMAN_AI.md) |
+| Gameplay — วิธีเล่นแต่ละโหมด & API | [docs/GAMEPLAY.md](docs/GAMEPLAY.md) |
 
 ---
 
