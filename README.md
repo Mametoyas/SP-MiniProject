@@ -103,48 +103,6 @@ SP-MiniProject/
 
 ---
 
-## วิธีติดตั้งและรัน
-
-**1. สร้าง Virtual Environment**
-
-```bash
-python -m venv venv
-```
-
-**2. Activate Virtual Environment**
-
-```bash
-# Windows
-venv\Scripts\activate
-
-# macOS / Linux
-source venv/bin/activate
-```
-
-> ถ้า activate สำเร็จ จะเห็น `(venv)` นำหน้า prompt
-
-**3. ติดตั้ง dependencies**
-
-```bash
-pip install -r requirements.txt
-```
-
-**4. รัน Flask server**
-
-```bash
-python app.py
-```
-
-**5. เปิดเบราว์เซอร์**
-
-```
-http://localhost:5000
-```
-
-> ออกจาก env เมื่อเลิกใช้งานด้วย `deactivate`
-
----
-
 ## เอกสารเพิ่มเติม
 
 | หัวข้อ | ไฟล์ |
