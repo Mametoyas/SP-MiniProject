@@ -500,36 +500,36 @@ python eval_models.py
       <td>นายจักรพรรดิ์ มั่งกูล</td>
       <td align="center">—</td>
       <td align="center">10 / 10</td>
-      <td align="center">____ / 10</td>
-      <td align="center">____ / 10</td>
+      <td align="center">6 / 10</td>
+      <td align="center">10 / 10</td>
     </tr>
     <tr>
       <td>นายเชิดตระกูล แข็งขัน</td>
-      <td align="center">____ / 10</td>
+      <td align="center">10 / 10</td>
       <td align="center">—</td>
-      <td align="center">____ / 10</td>
-      <td align="center">____ / 10</td>
+      <td align="center">7 / 10</td>
+      <td align="center">10 / 10</td>
     </tr>
     <tr>
       <td>นายพงษกร มานาดี</td>
-      <td align="center">____ / 10</td>
-      <td align="center">____ / 10</td>
+      <td align="center">10 / 10</td>
+      <td align="center">10 / 10</td>
       <td align="center">—</td>
-      <td align="center">____ / 10</td>
+      <td align="center">10 / 10</td>
     </tr>
     <tr>
       <td>นางสาวทักษพร มูลมณี</td>
       <td align="center">10 / 10</td>
       <td align="center">10 / 10</td>
-      <td align="center">9 / 10</td>
+      <td align="center">6 / 10</td>
       <td align="center">—</td>
     </tr>
     <tr>
       <td><b>คะแนนเฉลี่ยที่ได้รับ</b></td>
-      <td align="center"><b>____ / 10</b></td>
-      <td align="center"><b>____ / 10</b></td>
-      <td align="center"><b>____ / 10</b></td>
-      <td align="center"><b>____ / 10</b></td>
+      <td align="center"><b>10 / 10</b></td>
+      <td align="center"><b>10 / 10</b></td>
+      <td align="center"><b>6 / 10</b></td>
+      <td align="center"><b>10 / 10</b></td>
     </tr>
   </tbody>
 </table>
