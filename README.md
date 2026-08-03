@@ -172,6 +172,58 @@ python app.py
 ## โครงสร้างโปรเจกต์
 
 ```text
+📁SP-MiniProject
+  ├── 📁.vscode
+  │    ├── settings.json
+  ├── 📁codes
+  │    ├── eval_models.py
+  │    ├── generate_words.py
+  │    ├── Hangman_AI.ipynb
+  │    ├── Hangman.ipynb
+  │    ├── make_dataset.py
+  │    ├── predict.py
+  │    ├── test_ai.ipynb
+  │    ├── train_models.py
+  ├── 📁datasets
+  │    ├── hangman_dataset.csv
+  │    ├── model_comparison.csv
+  │    ├── words.txt
+  ├── 📁docs
+  │    ├── GAMEPLAY.md
+  │    ├── HANGMAN_AI.md
+  │    ├── Mini-Project.md
+  │    ├── QUICKSTART.md
+  ├── 📁games
+  │    └── 📁hangman
+  │        ├── __init__.py
+  │        ├── hangman_ai.css
+  │        ├── hangman_ai.html
+  │        ├── hangman_ai.js
+  │        ├── hangman.css
+  │        ├── hangman.html
+  │        ├── hangman.js
+  │        ├── hangman.py
+  │    ├── __init__.py
+  ├── 📁models
+  │    ├── hangman_lr.pkl
+  │    ├── hangman_nb.pkl
+  │    ├── hangman_tree.pkl
+  ├── 📁static
+  │    ├── menu.css
+  │    ├── menu.js
+  ├── 📁templates
+  │    ├── index.html
+  ├── app.py
+  ├── CHANGELOG.md
+  ├── ChatGPT-history.txt
+  ├── LEARNINGLOG.md
+  ├── LEARNINGLOG.txt
+  ├── Mini_Project.ipynb
+  ├── README.md
+  ├── requirements.txt
+  ├── Teacher prompt.txt
+  └── TEST.md
+
 SP-MiniProject/
 ├── app.py                      # Flask entry point (routing + blueprints)
 ├── requirements.txt            # Python dependencies
