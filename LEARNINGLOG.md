@@ -6,22 +6,32 @@
 
 > As a Python novice, please respond with AI ethics, explainable AI, and responsible AI in mind.
 
-**คำตอบที่นำมาใช้กับโครงงาน**
+**ChatGPT**
+For a Python novice, present the AI part honestly and simply:
 
-สำหรับเกม Hangman กลุ่มเลือกใช้ Machine Learning แบบขนาดเล็กและข้อมูลคำศัพท์ภายในโปรเจกต์ แทนการพึ่งพา LLM หรือบริการภายนอก เพราะอธิบายกระบวนการทำงาน ตรวจสอบข้อมูล และรันซ้ำได้ง่ายกว่า เหมาะกับผู้เริ่มต้นที่ต้องการเข้าใจว่า AI สร้างคำแนะนำอย่างไร
+- The project uses AI to suggest likely letters in Hangman; it does not “understand” words like a person.
+- The model learns patterns from example game states in the dataset, such as the current word pattern, letters guessed, wrong guesses, and word length.
+- Three models were compared: Decision Tree, Logistic Regression, and Naive Bayes. The plan says the Decision Tree performed best, so it was selected.
 
-- **AI ethics:** ใช้ `datasets/words.txt` ซึ่งเป็นคลังคำศัพท์สำหรับเกม หลีกเลี่ยงข้อมูลส่วนบุคคล ไม่มีการบันทึกชื่อหรือพฤติกรรมของผู้เล่น และใช้ AI เพื่อช่วยเล่นเกม ไม่ใช่ตัดสินคุณค่าหรือความสามารถของบุคคล
-- **Explainable AI:** AI รับข้อมูล 3 ส่วน ได้แก่ pattern ของคำ เช่น `_a__a_`, อักษรที่เดาถูก และอักษรที่เดาผิด จากนั้นกรอง candidate words ที่เข้ากัน นับ/ประเมินตัวอักษรที่ยังเป็นไปได้ แล้วคืนคำแนะนำสูงสุด 5 ตัวอักษร ผู้เล่นยังเป็นผู้ตัดสินใจเลือกคำตอบเองใน AI Assist mode
-- **Responsible AI:** คำแนะนำของโมเดลไม่ควรถูกนำเสนอเป็นคำตอบที่ถูกต้องแน่นอน ระบบจึงแสดงเป็น hint และไม่เปิดเผยคำตอบระหว่างเกม นอกจากนี้ `predict()` ตัดอักษรที่เดาแล้วออกด้วย `used = guessed | wrong` เพื่อลดคำแนะนำซ้ำและช่วยให้ผู้ใช้เข้าใจข้อจำกัดของ AI
+Explainable AI (XAI):
 
-**หลักฐานในโครงงาน**
+- A Decision Tree is a good beginner-friendly choice because its decision process can be inspected as a series of conditions.
+- We can explain its input clearly: `pattern`, `guessed`, `wrong`, `length`, `revealed`, and `candidate_count`.
+- The system returns the top 5 suggested letters, not only one answer. This lets the player see alternatives and keeps the player in control.
+- Important limitation: a suggestion is a prediction, not a guarantee. The model can be wrong.
 
-| ส่วน | การนำไปใช้ |
-|---|---|
-| `datasets/words.txt` | แหล่งคำศัพท์ที่ใช้สร้างข้อมูลและเล่นเกม โดยไม่มีข้อมูลส่วนบุคคล |
-| `codes/make_dataset.py` | สร้างสถานะเกมจากคำศัพท์อย่างตรวจสอบได้ เช่น pattern, guessed, wrong และ candidate count |
-| `codes/predict.py` | แปลงสถานะเกมเป็นคำแนะนำ พร้อมตัดตัวอักษรที่ใช้แล้ว |
-| AI Assist | แสดงคำแนะนำให้ผู้เล่น แต่ผู้เล่นเป็นผู้เลือกอักษรที่จะเดา |
+Responsible AI:
+
+- AI is used as an assistant in “AI Assist” mode, not as a replacement for the player’s decision.
+- The game should show that recommendations come from a trained model and may be inaccurate.
+- The training data should contain appropriate words and avoid offensive, sensitive, or copyrighted word lists.
+- Test the model across all categories—animals, fruits, and countries—to check that it does not work well only for one category.
+- If the AI repeats a letter or returns an unusable prediction, use a fallback alphabet rule. This is a practical safety measure and should be mentioned in the changelog.
+
+A simple presentation line:
+
+> Our AI is a helper, not an authority. It recommends possible letters based on game-state data, explains its inputs through an interpretable Decision Tree model, and keeps the final choice with the player.
+
 
 ## Prompt 2 — Conceive a Python Mini Project
 
@@ -29,32 +39,25 @@
 
 > As a Python beginner, help me to conceive mini projects in Python fundamentals to expand my knowledge and to encounter real-world use cases. Include learning outcomes, traits assessment, and topic.
 
-**คำตอบที่นำมาใช้กับโครงงาน**
+**ChatGPT**
+As a Python beginner, help me explain our project, **Co-op Hangman with AI**, through Python fundamentals and real-world skills.
 
-กลุ่มเลือกหัวข้อ **Mini Game Hub: Hangman with AI Assistance** เพราะเริ่มต้นจากเกม console ที่มี logic ไม่ซับซ้อน และค่อย ๆ ต่อขยายเป็นเว็บแอปและ AI ได้ ช่วยให้เรียนรู้พื้นฐาน Python ผ่านปัญหาจริงขนาดเล็กแทนการเรียนแนวคิดแยกส่วน
+The project is a cooperative word-guessing game where players work together to guess a hidden word. AI can suggest likely letters, but players make the final decisions.
 
-| องค์ประกอบ | การออกแบบสำหรับโครงงาน |
-|---|---|
-| หัวข้อ | เกม Hangman 3 โหมด: Classic, AI Assist และ VS AI |
-| พื้นฐาน Python | ตัวแปร, `str`, `int`, `list`, `set`, `dict`, loop, condition, function, import และ file I/O |
-| โจทย์ปัญหา | รับคำเดา ตรวจคำซ้ำ แสดงช่องว่าง นับโอกาสผิด และระบุผลชนะ/แพ้ |
-| การประยุกต์ใช้ | สร้าง REST API ด้วย Flask และให้ JavaScript เรียก API เพื่ออัปเดตหน้าเกม |
-| การต่อยอด | สร้าง dataset จากคลังคำศัพท์ เทรนโมเดล และนำคำแนะนำ AI กลับมาใช้ในเกม |
-| Traits ที่ประเมิน | การวิเคราะห์ปัญหา, การแบ่งงาน, ความรับผิดชอบ, การสื่อสาร, การตรวจสอบข้อผิดพลาด และการใช้ AI อย่างมีวิจารณญาณ |
+Explain how we use:
 
-ตัวอย่างการเลือกใช้โครงสร้างข้อมูลตามหน้าที่จริง:
+- `list` to store words in each category
+- `dictionary` to organize categories such as animals, fruits, and countries
+- `set` to save guessed letters without duplicates
+- `random.choice()` to select a word randomly
+- loops and conditions to control turns, validate guesses, and determine win/loss states
+- functions to separate tasks, such as starting a game, processing a guess, checking a win, and generating AI suggestions
+- Flask and API routes to connect the game interface with Python logic
+- file handling and datasets to prepare data for the AI model
+- a Decision Tree model to suggest the top five possible letters
 
-```python
-# dictionary จัดหมวดคำศัพท์ และ list เก็บคำในแต่ละหมวดเพื่อสุ่มคำ
-WORDS = {"ANIMALS": ["elephant", "giraffe"], "FRUITS": ["mango", "coconut"]}
+For responsible and explainable AI, explain that the AI is a helper rather than a decision-maker. It uses visible game-state inputs—such as the word pattern, guessed letters, incorrect letters, and word length—to make suggestions. A Decision Tree is relatively easy to inspect and explain. The game should clearly state that suggestions may be wrong, avoid repeated or invalid guesses through validation and fallback logic, and let players choose whether to follow the AI’s recommendation.
 
-# set ใช้เก็บตัวอักษรไม่ซ้ำ และรองรับการหาผลต่าง/ผลรวมของชุดข้อมูล
-letters_in_word = set("elephant")
-wrong_letters = guessed_letters - letters_in_word
-used_letters = guessed_letters | wrong_letters
-```
-
-แนวคิดนี้ถูกใช้จริงใน `games/hangman/hangman.py`, `codes/make_dataset.py` และ `codes/predict.py` โดย list เหมาะกับการสุ่ม/เก็บลำดับ ส่วน set เหมาะกับการตัดข้อมูลซ้ำและตรวจ membership อย่างชัดเจน
 
 ## Prompt 3 — Why Kanban, WIP and Changelog from the Beginning?
 
@@ -62,18 +65,28 @@ used_letters = guessed_letters | wrong_letters
 
 > Why introduce Kanban, WIP, and Changelog since the beginning of Python programming is a good idea for students to use GenAI to grasp teacher materials and make progress rapidly in learning Python along with `learning_log.ipynb` for prompt and response logging?
 
-**คำตอบที่นำมาใช้กับโครงงาน**
+**ChatGPT**
+Introducing Kanban, WIP limits, changelogs, and a `learning_log.ipynb` from the beginning is a good idea because students learn Python as a practical development process—not just as isolated syntax.
 
-การเริ่มใช้ Kanban, WIP limit, Changelog และ Learning Log ตั้งแต่ช่วงต้น ช่วยให้กลุ่มเปลี่ยนการเรียนด้วย GenAI ให้เป็นกระบวนการที่ตรวจสอบได้ ไม่ใช่เพียงรับคำตอบหรือคัดลอกโค้ดจาก AI
+- Kanban makes work visible: students can track tasks from “To Do” to “Doing” to “Done,” such as learning dictionaries, implementing input validation, or testing a function.
+- WIP (Work in Progress) limits prevent beginners from starting too many features at once. They finish one small Python concept before moving on, which reduces confusion and encourages steady progress.
+- A changelog records what changed, why it changed, and what was learned. This helps students explain their code during presentations and makes improvement visible over time.
+- `learning_log.ipynb` can document prompts given to generative AI, AI responses, the student’s own understanding, code experiments, errors, corrections, and references.
 
-| เครื่องมือ | วิธีใช้ในโครงงาน | ประโยชน์ต่อการเรียนรู้ |
-|---|---|---|
-| Kanban Backlog | แตกงานเป็นการศึกษากติกาเกม, draft Classic mode, แยกโมดูล, สร้าง dataset, เทรนโมเดล, ทำ UI และจัดทำเอกสาร | เห็นลำดับก่อน–หลังและงานคงค้างอย่างชัดเจน |
-| WIP (Work in Progress) | ทำงานหลักทีละเรื่อง เช่น ทำ game logic ให้เล่นได้ก่อนเริ่มสร้าง dataset และเทรนโมเดล | ลดการทำหลายส่วนพร้อมกันจนตรวจสอบข้อผิดพลาดไม่ได้ และทำให้ milestone ทดสอบได้จริง |
-| Changelog | บันทึกสิ่งที่เปลี่ยน พร้อมไฟล์และผลลัพธ์ใน `CHANGELOG.md` | ทำให้ย้อนดูการพัฒนาและตรวจหลักฐานการทำงานได้ |
-| Learning Log | บันทึก prompt ของอาจารย์ คำตอบที่นำมาใช้ และเหตุผลในการปรับใช้กับโครงงาน | ฝึกตั้งคำถามกับ AI, ตรวจสอบคำตอบ และอธิบายการตัดสินใจของตนเองได้ |
+When using generative AI, students should treat it as a learning assistant—not as an answer generator. They should verify each suggestion by running it, explaining it in their own words, and recording whether it worked. The log should also disclose which parts were AI-assisted and avoid putting private data, credentials, or copyrighted course materials into external AI tools.
 
-หลักการสำคัญคือ **GenAI เป็นผู้ช่วยเสนอแนวทาง ไม่ใช่ผู้ตัดสินคำตอบสุดท้าย** ทุกข้อเสนอถูกตรวจเทียบกับข้อกำหนดเกม โค้ดที่มีอยู่ และผลการทดลองก่อนนำมาใช้
+For the Co-op Hangman with AI project, this creates a clear learning trail:
+
+```text
+Kanban task
+→ learn a Python concept
+→ ask AI for an explanation/example
+→ test and modify the code
+→ record prompt, response, result, and reflection in learning_log.ipynb
+→ document the completed change in CHANGELOG.md
+```
+
+This builds Python fundamentals alongside responsible AI use, documentation habits, teamwork, and the ability to explain how the project evolved.
 
 ## Prompt 4 — Adjust Kanban Backlogs to the Mini-Project Outline
 
@@ -81,22 +94,62 @@ used_letters = guessed_letters | wrong_letters
 
 > Adjust Kanban backlogs according to this outline of the mini project.
 
-**คำตอบที่นำมาใช้กับโครงงาน**
+**ChatGPT**
 
-กลุ่มปรับ Kanban ให้แต่ละงานส่งมอบผลลัพธ์ที่ตรวจสอบได้ และเรียงจากพื้นฐาน Python ไปยังเว็บและ AI ดังนี้
+## Kanban backlog — Co-op Hangman with AI
 
-| ลำดับ | Kanban item | ผลลัพธ์ที่ตรวจสอบได้ | สถานะ |
-|:---:|---|---|:---:|
-| 1 | ศึกษาหัวข้อ Hangman และกำหนดกติกา | pseudocode สำหรับสุ่มคำ รับคำเดา ชีวิต 6 ครั้ง และเงื่อนไขชนะ/แพ้ | Done |
-| 2 | สร้าง draft เกมแบบไม่มี AI | Classic mode เล่นได้ด้วยคำศัพท์และ game state ใน Python | Done |
-| 3 | แยกโมดูลและสร้าง API | `app.py`, Flask Blueprint และ routes ของ Hangman แยกจาก UI | Done |
-| 4 | ออกแบบข้อมูลสำหรับ AI | `words.txt` และ `hangman_dataset.csv` มี pattern, guessed, wrong และ candidate count | Done |
-| 5 | เทรนและประเมินโมเดล | มี Decision Tree, Logistic Regression, Naive Bayes และผลเปรียบเทียบ | Done |
-| 6 | เชื่อมโมเดลเข้ากับเกม | `predict(pattern, guessed, wrong)` ส่งคำแนะนำให้ AI Assist/VS AI | Done |
-| 7 | พัฒนาเว็บ UI | มี Menu, Classic, AI Assist, VS AI พร้อม CSS และ JavaScript แยกตามหน้าที่ | Done |
-| 8 | ทดสอบและปรับปรุง | ตรวจ flow การเริ่มเกม การเดา และเอกสาร; automated tests เป็นงานต่อยอด | In progress |
+Use small, testable cards. Keep WIP limited to 2 cards per person.
 
-Kanban ฉบับสรุปสำหรับติดตามงานอยู่ใน [README.md](README.md#kanban-backlog) ส่วน Changelog บันทึกเหตุการณ์ที่เกิดขึ้นแล้วใน [CHANGELOG.md](CHANGELOG.md)
+| Priority | Backlog card | Done when |
+|---|---|---|
+| P0 | Define game rules and three modes: Classic, AI Assist, VS AI | Rules are written and agreed by the team |
+| P0 | Create word categories with a dictionary | `WORDS` has Animals, Fruits, Countries and each has sample words |
+| P0 | Randomly choose a category and word | `random.choice()` selects a valid word |
+| P0 | Store guessed letters in a set | Duplicate guesses do not change the game state |
+| P0 | Build core guess-validation function | Reject blank, multi-character, non-letter, and repeated guesses |
+| P0 | Implement win/loss conditions | Correctly detects all letters revealed or maximum wrong guesses reached |
+| P0 | Display game state | Shows hidden-word pattern, guessed letters, wrong letters, and remaining attempts |
+| P1 | Create Flask app and Hangman Blueprint | App starts and Hangman routes are separated from `app.py` |
+| P1 | Add `POST /api/hangman/new` | Returns a new safe game state |
+| P1 | Add `POST /api/hangman/guess` | Receives a guess, validates it, and returns updated state |
+| P1 | Connect frontend with `fetch()` | Player can start and play through the browser |
+| P1 | Implement co-op interaction | Players can share the same game state and take turns or contribute guesses |
+| P1 | Prepare AI dataset | Dataset contains game-state features: pattern, guessed, wrong, length, revealed, candidate count |
+| P1 | Train and compare models | Decision Tree, Logistic Regression, and Naive Bayes are evaluated and results recorded |
+| P1 | Implement AI letter suggestions | `predict()` returns five valid, unguessed suggestions |
+| P1 | Add AI safety fallback | If prediction is invalid/repeated, choose from remaining alphabet letters |
+| P1 | Add responsible-AI explanation | UI/documentation says AI is a suggestion, may be wrong, and player chooses |
+| P2 | Test core Python functions | Tests cover valid/invalid/repeated guesses and win/loss cases |
+| P2 | Test all word categories and AI modes | No category or mode breaks during normal play |
+| P2 | Update `CHANGELOG.md` | Every completed feature/fix has date, description, and author |
+| P2 | Maintain `learning_log.ipynb` | Prompts, AI responses, verification, code changes, and reflections are recorded |
+| P2 | Prepare demo and backup | Happy path works; screenshots/GIF are available if the live demo fails |
+| P2 | Prepare presentation artifacts | Slides, repository/QR link, changelog, learning log, and demo are ready |
+
+Suggested board columns:
+
+```text
+Backlog → Ready → Doing (max 2/person) → Review/Test → Done
+```
+
+Example first sprint:
+
+```text
+Ready:
+- Dictionary word categories
+- Random word selection
+- Guessed-letter set
+- Guess validation
+
+Doing:
+- Core game-state function
+- Win/loss conditions
+
+Done:
+- Project rules and modes
+```
+
+This order ensures the team learns Python fundamentals first, then Flask integration, then AI, testing, documentation, and presentation.
 
 ## Prompt 5 — Execute the Kanban Backlog
 
