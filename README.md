@@ -499,7 +499,7 @@ python eval_models.py
     <tr>
       <td>นายจักรพรรดิ์ มั่งกูล</td>
       <td align="center">—</td>
-      <td align="center">____ / 10</td>
+      <td align="center">10 / 10</td>
       <td align="center">____ / 10</td>
       <td align="center">____ / 10</td>
     </tr>
