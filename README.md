@@ -462,8 +462,8 @@ python eval_models.py
     <tr>
       <td>นางสาวทักษพร มูลมณี</td>
       <td align="center">10 / 10</td>
-      <td align="center">____ / 10</td>
-      <td align="center">____ / 10</td>
+      <td align="center">10 / 10</td>
+      <td align="center">9 / 10</td>
       <td align="center">—</td>
     </tr>
     <tr>
