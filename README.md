@@ -528,7 +528,7 @@ python eval_models.py
       <td><b>คะแนนเฉลี่ยที่ได้รับ</b></td>
       <td align="center"><b>10 / 10</b></td>
       <td align="center"><b>10 / 10</b></td>
-      <td align="center"><b>6 / 10</b></td>
+      <td align="center"><b>6.34 / 10</b></td>
       <td align="center"><b>10 / 10</b></td>
     </tr>
   </tbody>
