@@ -1,7 +1,7 @@
 import random
 import sys
 from pathlib import Path
-from flask import Blueprint, jsonify, request, send_from_directory
+from flask import Blueprint, jsonify, request, send_from_directory, session
 
 sys.path.append(str(Path(__file__).resolve().parent.parent.parent / "codes"))
 from predict import predict
@@ -18,8 +18,6 @@ WORDS = {
 }
 CATEGORY_TH = {"ANIMALS": "สัตว์", "FRUITS": "ผลไม้", "COUNTRIES": "ประเทศ"}
 MAX_WRONG   = 6
-game: dict  = {}
-ai_game: dict = {}
 
 def _new() -> dict:
     cat  = random.choice(list(WORDS.keys()))
@@ -131,112 +129,122 @@ def api_ai_new():
             "turn":        "player",
         })
 
-    ai_game.clear()
-    ai_game.update(g)
-    return jsonify(_ai_public(ai_game))
+    session["ai_game"] = g
+    return jsonify(_ai_public(g))
 
 @hangman_bp.route("/api/hangman/ai/guess", methods=["POST"])
 def api_ai_guess():
-    if not ai_game:
+    g = session.get("ai_game")
+    if not g:
         return jsonify({"error": "no game"}), 400
-    if ai_game["status"] != "playing":
-        return jsonify({**_ai_public(ai_game), "result": "game_over"})
+    if g["status"] != "playing":
+        return jsonify({**_ai_public(g), "result": "game_over"})
 
     data   = request.get_json(silent=True) or {}
     letter = str(data.get("letter", "")).strip().lower()
     if len(letter) != 1 or not letter.isalpha():
         return jsonify({"error": "invalid"}), 400
 
-    mode = ai_game["mode"]
+    mode = g["mode"]
 
     # ── Assist: player guesses p_word ────────────────────────────────────────
     if mode == "assist":
-        if letter in ai_game["p_guessed"]:
-            return jsonify({**_ai_public(ai_game), "result": "already_guessed"})
-        ai_game["p_guessed"].append(letter)
-        if letter in ai_game["p_word"]:
+        if letter in g["p_guessed"]:
+            return jsonify({**_ai_public(g), "result": "already_guessed"})
+        g["p_guessed"].append(letter)
+        if letter in g["p_word"]:
             result = "correct"
-            if _check_win(ai_game["p_word"], ai_game["p_guessed"]):
-                ai_game["status"] = "win"
+            if _check_win(g["p_word"], g["p_guessed"]):
+                g["status"] = "win"
         else:
             result = "wrong"
-            ai_game["p_wrong"] += 1
-            if ai_game["p_wrong"] >= MAX_WRONG:
-                ai_game["status"] = "lose"
-        return jsonify({**_ai_public(ai_game), "result": result})
+            g["p_wrong"] += 1
+            if g["p_wrong"] >= MAX_WRONG:
+                g["status"] = "lose"
+        session["ai_game"] = g
+        return jsonify({**_ai_public(g), "result": result})
 
     # ── VS: player guesses p_word, then AI guesses a_word ────────────────────
     if mode == "vs":
-        if ai_game["turn"] != "player":
+        if g["turn"] != "player":
             return jsonify({"error": "not your turn"}), 400
-        if letter in ai_game["p_guessed"]:
-            return jsonify({**_ai_public(ai_game), "result": "already_guessed"})
+        if letter in g["p_guessed"]:
+            return jsonify({**_ai_public(g), "result": "already_guessed"})
 
-        ai_game["p_guessed"].append(letter)
-        if letter in ai_game["p_word"]:
+        g["p_guessed"].append(letter)
+        if letter in g["p_word"]:
             p_result = "correct"
-            if _check_win(ai_game["p_word"], ai_game["p_guessed"]):
-                ai_game["status"] = "player_win"
-                return jsonify({**_ai_public(ai_game), "result": p_result, "ai_result": None})
+            if _check_win(g["p_word"], g["p_guessed"]):
+                g["status"] = "player_win"
+                session["ai_game"] = g
+                return jsonify({**_ai_public(g), "result": p_result, "ai_result": None, "ai_letter": None})
         else:
             p_result = "wrong"
-            ai_game["p_wrong"] += 1
-            if ai_game["p_wrong"] >= MAX_WRONG:
-                ai_game["status"] = "player_lose"
-                return jsonify({**_ai_public(ai_game), "result": p_result, "ai_result": None})
+            g["p_wrong"] += 1
+            if g["p_wrong"] >= MAX_WRONG:
+                g["status"] = "player_lose"
+                session["ai_game"] = g
+                return jsonify({**_ai_public(g), "result": p_result, "ai_result": None, "ai_letter": None})
 
         # AI's turn
-        ai_game["turn"] = "ai"
-        a_word    = ai_game["a_word"]
-        a_guessed = set(ai_game["a_guessed"])
+        g["turn"] = "ai"
+        a_word    = g["a_word"]
+        a_guessed = set(g["a_guessed"])
         pattern   = "".join(c if c in a_guessed else "_" for c in a_word)
         wrong_s   = a_guessed - set(a_word)
         suggestions = predict(pattern, a_guessed & set(a_word), wrong_s)
         ai_letter   = suggestions[0]
 
-        ai_game["a_guessed"].append(ai_letter)
+        g["a_guessed"].append(ai_letter)
         if ai_letter in a_word:
             ai_result = "correct"
-            if _check_win(a_word, ai_game["a_guessed"]):
-                ai_game["status"] = "ai_win"
-                ai_game["turn"]   = "player"
-                return jsonify({**_ai_public(ai_game), "result": p_result, "ai_result": ai_result, "ai_letter": ai_letter})
+            if _check_win(a_word, g["a_guessed"]):
+                g["status"] = "ai_win"
+                g["turn"]   = "player"
+                session["ai_game"] = g
+                return jsonify({**_ai_public(g), "result": p_result, "ai_result": ai_result, "ai_letter": ai_letter})
         else:
             ai_result = "wrong"
-            ai_game["a_wrong"] += 1
-            if ai_game["a_wrong"] >= MAX_WRONG:
-                ai_game["status"] = "ai_lose"
-                ai_game["turn"]   = "player"
-                return jsonify({**_ai_public(ai_game), "result": p_result, "ai_result": ai_result, "ai_letter": ai_letter})
+            g["a_wrong"] += 1
+            if g["a_wrong"] >= MAX_WRONG:
+                g["status"] = "ai_lose"
+                g["turn"]   = "player"
+                session["ai_game"] = g
+                return jsonify({**_ai_public(g), "result": p_result, "ai_result": ai_result, "ai_letter": ai_letter})
 
-        ai_game["turn"] = "player"
-        return jsonify({**_ai_public(ai_game), "result": p_result, "ai_result": ai_result, "ai_letter": ai_letter})
+        g["turn"] = "player"
+        session["ai_game"] = g
+        return jsonify({**_ai_public(g), "result": p_result, "ai_result": ai_result, "ai_letter": ai_letter})
 
 @hangman_bp.route("/api/hangman/new", methods=["POST"])
 def api_new():
-    game.update(_new())
-    return jsonify(_public(game))
+    g = _new()
+    session["game"] = g
+    return jsonify(_public(g))
 
 @hangman_bp.route("/api/hangman/guess", methods=["POST"])
 def api_guess():
-    if not game:
-        game.update(_new())
+    g = session.get("game")
+    if not g:
+        g = _new()
+        session["game"] = g
     data   = request.get_json(silent=True) or {}
     letter = str(data.get("letter", "")).strip().lower()
     if len(letter) != 1 or not letter.isalpha():
         return jsonify({"error": "invalid"}), 400
-    if game["status"] != "playing":
-        return jsonify({**_public(game), "result": "game_over"})
-    if letter in game["guessed"]:
-        return jsonify({**_public(game), "result": "already_guessed"})
-    game["guessed"].append(letter)
-    if letter in game["word"]:
+    if g["status"] != "playing":
+        return jsonify({**_public(g), "result": "game_over"})
+    if letter in g["guessed"]:
+        return jsonify({**_public(g), "result": "already_guessed"})
+    g["guessed"].append(letter)
+    if letter in g["word"]:
         result = "correct"
-        if all(ch in game["guessed"] for ch in game["word"]):
-            game["status"] = "win"
+        if all(ch in g["guessed"] for ch in g["word"]):
+            g["status"] = "win"
     else:
         result = "wrong"
-        game["wrong_count"] += 1
-        if game["wrong_count"] >= MAX_WRONG:
-            game["status"] = "lose"
-    return jsonify({**_public(game), "result": result})
+        g["wrong_count"] += 1
+        if g["wrong_count"] >= MAX_WRONG:
+            g["status"] = "lose"
+    session["game"] = g
+    return jsonify({**_public(g), "result": result})

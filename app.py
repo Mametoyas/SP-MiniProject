@@ -6,6 +6,7 @@ from flask import Flask, render_template, send_from_directory
 from games.hangman.hangman import hangman_bp
 
 app = Flask(__name__, template_folder="templates", static_folder="static", static_url_path="/static")
+app.secret_key = "hangman-secret-key-kku-cp352301"
 app.register_blueprint(hangman_bp)
 
 # ── Static files per game ─────────────────────────────────────────────────────
