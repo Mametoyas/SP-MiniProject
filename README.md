@@ -172,102 +172,56 @@ python app.py
 ## โครงสร้างโปรเจกต์
 
 ```text
-📁SP-MiniProject/
- │
- ├── 📁codes/
- │    ├── eval_models.py
- │    ├── generate_words.py
- │    ├── Hangman_AI.ipynb
- │    ├── Hangman.ipynb
- │    ├── make_dataset.py
- │    ├── predict.py
- │    ├── test_ai.ipynb
- │    └── train_models.py
- │
- ├── 📁datasets/
- │    ├── hangman_dataset.csv
- │    ├── model_comparison.csv
- │    └── words.txt
- │
- ├── 📁docs/
- │    ├── GAMEPLAY.md
- │    ├── HANGMAN_AI.md
- │    ├── Mini-Project.md
- │    └── QUICKSTART.md
- │
- ├── 📁games/
- │    ├── __init__.py
- │    └── 📁hangman/
- │        ├── __init__.py
- │        ├── hangman_ai.css
- │        ├── hangman_ai.html
- │        ├── hangman_ai.js
- │        ├── hangman.css
- │        ├── hangman.html
- │        ├── hangman.js
- │        └── hangman.py
- │
- ├── 📁models/
- │    ├── hangman_lr.pkl
- │    ├── hangman_nb.pkl
- │    └── hangman_tree.pkl
- │
- ├── 📁static/
- │    ├── menu.css
- │    └── menu.js
- │
- ├── 📁templates/
- │    └── index.html
- │
- ├── app.py
- ├── CHANGELOG.md
- ├── ChatGPT-history.txt
- ├── LEARNINGLOG.md
- ├── LEARNINGLOG.txt
- ├── Mini_Project.ipynb
- ├── README.md
- ├── requirements.txt
- ├── Teacher prompt.txt
- └── TEST.md
-
-SP-MiniProject/
-├── app.py                      # Flask entry point (routing + blueprints)
-├── requirements.txt            # Python dependencies
-├── templates/
-│   └── index.html              # หน้า Menu หลัก
-├── static/
-│   ├── menu.css
-│   └── menu.js
-├── games/
-│   └── hangman/                # เกม Hangman (frontend + blueprint)
-│       ├── hangman.py          # Flask blueprint (API)
-│       ├── hangman.html        # Classic mode UI
-│       ├── hangman.css
-│       ├── hangman.js
-│       ├── hangman_ai.html     # AI Assist / VS AI mode UI
-│       ├── hangman_ai.css
-│       └── hangman_ai.js
-├── models/
-│   ├── hangman_tree.pkl        # Decision Tree (ใช้งานจริง)
-│   ├── hangman_lr.pkl          # Logistic Regression (offline)
-│   └── hangman_nb.pkl          # Naive Bayes (offline)
-├── datasets/
-│   ├── words.txt               # คลังคำศัพท์ (animal / country / fruit)
-│   ├── hangman_dataset.csv     # Dataset ที่สร้างจาก words.txt
-│   └── model_comparison.csv   # ผลเปรียบเทียบโมเดล
-├── codes/                      # Offline AI pipeline scripts
-│   ├── predict.py              # ฟังก์ชัน predict (ใช้งานจริง)
-│   ├── make_dataset.py
-│   ├── train_models.py
-│   ├── eval_models.py
-│   ├── generate_words.py
-│   ├── Hangman_AI.ipynb
-│   ├── Hangman.ipynb
-│   └── test_ai.ipynb
-└── docs/
-    ├── QUICKSTART.md           # คู่มือติดตั้งและรันแบบเร็ว
-    ├── HANGMAN_AI.md           # AI pipeline & predict()
-    └── GAMEPLAY.md             # วิธีเล่นแต่ละโหมด & API
+└── 📁SP-MiniProject
+    └── 📁codes
+        └── 📁notebooks
+            ├── Hangman_AI.ipynb
+            ├── Hangman.ipynb
+            ├── test_ai.ipynb
+        ├── eval_models.py
+        ├── generate_words.py
+        ├── make_dataset.py
+        ├── predict.py
+        ├── train_models.py
+    └── 📁datasets
+        ├── hangman_dataset.csv
+        ├── model_comparison.csv
+        ├── words.txt
+    └── 📁docs
+        ├── GAMEPLAY.md
+        ├── HANGMAN_AI.md
+        ├── Mini-Project.md
+        ├── QUICKSTART.md
+    └── 📁games
+        └── 📁hangman
+            ├── __init__.py
+            ├── hangman_ai.css
+            ├── hangman_ai.html
+            ├── hangman_ai.js
+            ├── hangman.css
+            ├── hangman.html
+            ├── hangman.js
+            ├── hangman.py
+        ├── __init__.py
+    └── 📁models
+        ├── hangman_lr.pkl
+        ├── hangman_nb.pkl
+        ├── hangman_tree.pkl
+    └── 📁static
+        ├── menu.css
+        ├── menu.js
+    └── 📁templates
+        ├── index.html
+    ├── .gitattributes
+    ├── .gitignore
+    ├── app.py
+    ├── CHANGELOG.md
+    ├── ChatGPT-history.txt
+    ├── LEARNINGLOG.md
+    ├── Mini_Project.ipynb
+    ├── README.md
+    ├── requirements.txt
+    └── TEST.md
 ```
 
 ---
