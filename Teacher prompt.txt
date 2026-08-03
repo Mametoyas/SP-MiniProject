@@ -1,5 +1,0 @@
-AI Prompt 1 - as a python novice, please respond with ai ethics, explainable ai, and responsible ai in mind.
-AI Prompt 2: “as a python beginner, help me to conceive mini projects in python fundamentals to expand my knowledge and to encounter real world use cases” [learning outcode/traits assessment/TOPIC]
-AI Prompt 3: why introduce kanban, wip, and changelog since the beginning of python programming is a good idea for students to use gen ai to grasp teacher materials and make progress rapidly in learning python along with learning_log.ipynb for prompt and response logging
-AI Prompt 4: adjust kanban backlogs according to this outline of the mini project
-AI Prompt 5: execute the kanban backlog
