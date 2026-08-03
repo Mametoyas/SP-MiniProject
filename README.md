@@ -503,6 +503,10 @@ python eval_models.py
       <td><a href="docs/GAMEPLAY.md">docs/GAMEPLAY.md</a></td>
     </tr>
     <tr>
+      <td>แผนและผลการทดสอบ</td>
+      <td><a href="TEST.md">TEST.md</a></td>
+    </tr>
+    <tr>
       <td>ประวัติการเปลี่ยนแปลง</td>
       <td><a href="CHANGELOG.md">CHANGELOG.md</a></td>
     </tr>
