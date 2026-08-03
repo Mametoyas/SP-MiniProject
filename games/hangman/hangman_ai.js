@@ -233,25 +233,8 @@ function handleAssistResult(state, ch, btn) {
 }
 
 function handleVSResult(state, ch, btn) {
-  const p = state.player, a = state.ai;
+  const p = state.player;
 
-  // player result
-  if (state.result === "correct") {
-    sfxCorrect(); btn.classList.add("correct");
-    p.masked_word.forEach((letter, i) => {
-      if (letter === ch) {
-        const slot = document.getElementById(`vs-p-word-slot-${i}`);
-        if (slot) { slot.textContent = ch.toUpperCase(); slot.classList.add("revealed"); }
-      }
-    });
-  } else if (state.result === "wrong") {
-    sfxWrong(); btn.classList.add("wrong");
-  }
-  updateHearts("vs-p-hearts", p.wrong_count);
-  updateHangman(PARTS.vsp, p.wrong_count);
-  updateWrong("vs-p-wrong", p.wrong);
-
-  // end game check (player result — no AI turn needed)
   const endMap = {
     player_win:  "win",
     player_lose: "lose",
@@ -259,22 +242,34 @@ function handleVSResult(state, ch, btn) {
     ai_lose:     "ai_lose",
   };
 
+  // player result
+  if (state.result === "correct") {
+    sfxCorrect(); btn.classList.add("correct");
+    renderWord("vs-p-word", p.masked_word);
+  } else if (state.result === "wrong") {
+    sfxWrong(); btn.classList.add("wrong");
+  }
+  updateHearts("vs-p-hearts", p.wrong_count);
+  updateHangman(PARTS.vsp, p.wrong_count);
+  updateWrong("vs-p-wrong", p.wrong);
+
+  // no AI turn (player win/lose)
   if (!state.ai_letter) {
     guessing = false;
     if (endMap[state.status]) setTimeout(() => endGame(state, endMap[state.status]), 400);
     return;
   }
 
-  // AI result
+  // AI turn
+  updateTurnUI("ai");
   const aiLetter = state.ai_letter;
+  const a = state.ai;
   setTimeout(() => {
     if (state.ai_result === "correct") {
-      a.masked_word.forEach((letter, i) => {
-        if (letter === aiLetter) {
-          const slot = document.getElementById(`vs-a-word-slot-${i}`);
-          if (slot) { slot.textContent = aiLetter.toUpperCase(); slot.classList.add("revealed"); }
-        }
-      });
+      sfxCorrect();
+      renderWord("vs-a-word", a.masked_word);
+    } else {
+      sfxWrong();
     }
     updateHearts("vs-a-hearts", a.wrong_count);
     updateHangman(PARTS.vsa, a.wrong_count);
@@ -287,7 +282,7 @@ function handleVSResult(state, ch, btn) {
       updateTurnUI("player");
     }
     guessing = false;
-  }, 600);
+  }, 800);
 }
 
 // ── End game ──────────────────────────────────────────────────────────────────
