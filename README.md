@@ -306,7 +306,7 @@ python eval_models.py
     <tr>
       <td align="center"><code>Done</code></td>
       <td>สร้าง dataset สำหรับ Hangman</td>
-      <td>จำลอง game state จาก <code>words.txt</code> เป็น <code>hangman_dataset.csv</code></td>
+      <td>จำลอง game state ต่างๆ จากชุดข้อมูล</code></td>
     </tr>
     <tr>
       <td align="center"><code>Done</code></td>
