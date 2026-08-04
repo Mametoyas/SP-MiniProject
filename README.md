@@ -333,7 +333,7 @@ python eval_models.py
       <td>จัดทำเอกสารโครงการ</td>
       <td>มี Quick Start, Gameplay, AI pipeline และ README</td>
     </tr>
-    <tr>
+    <!-- <tr>
       <td align="center"><code>To do</code></td>
       <td>เพิ่ม automated tests สำหรับ API และ logic เกม</td>
       <td>ตรวจสอบการเริ่มเกม การเดา และสถานะชนะ/แพ้</td>
@@ -342,7 +342,7 @@ python eval_models.py
       <td align="center"><code>To do</code></td>
       <td>เพิ่มเกมหรือคลังคำศัพท์</td>
       <td>ขยาย Mini Game Hub ในอนาคต</td>
-    </tr>
+    </tr> -->
   </tbody>
 </table>
 
