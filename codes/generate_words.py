@@ -97,7 +97,7 @@ for word in animals + countries + fruits:
 words = sorted(all_words)
 print(f"Total unique words: {len(words)}")
 
-with open("words.txt", "w") as f:
+with open("../datasets/words.txt", "w") as f:
     f.write("\n".join(words))
 
 print("words.txt written successfully.")
