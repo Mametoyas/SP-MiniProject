@@ -305,11 +305,6 @@ python eval_models.py
     </tr>
     <tr>
       <td align="center"><code>Done</code></td>
-      <td>เพิ่มและจัดระเบียบโมดูล</td>
-      <td>แยก game logic, Flask Blueprint, scripts สำหรับ AI และไฟล์ static ตามหน้าที่</td>
-    </tr>
-    <tr>
-      <td align="center"><code>Done</code></td>
       <td>สร้าง dataset สำหรับ Hangman</td>
       <td>จำลอง game state จาก <code>words.txt</code> เป็น <code>hangman_dataset.csv</code></td>
     </tr>
@@ -327,6 +322,11 @@ python eval_models.py
       <td align="center"><code>Done</code></td>
       <td>พัฒนาเว็บ UI และ API</td>
       <td>สร้าง Menu, หน้าเกมทั้ง 3 โหมด, CSS/JavaScript และ API สำหรับเริ่มเกม/เดาตัวอักษร</td>
+    </tr>
+    <tr>
+      <td align="center"><code>Done</code></td>
+      <td>เพิ่มและจัดระเบียบโมดูล</td>
+      <td>แยก game logic, Flask Blueprint, scripts สำหรับ AI และไฟล์ static ตามหน้าที่</td>
     </tr>
     <tr>
       <td align="center"><code>Done</code></td>
