@@ -36,19 +36,11 @@
 
 ผู้จัดทำต้องการประยุกต์ใช้ความรู้จากรายวิชา ได้แก่
 
-- Variables
-- Data Types
-- Operators
-- Control Flow
-- Loop
-- Lists
-- Tuples
-- Dictionaries
-- Sets
-- Functions
-- Modules
-- Flask
-- External Libraries
+- Variables, Data Types, Operators
+- Control Flow, Loop
+- Lists, Tuples, Dictionaries, Sets
+- Functions, Modules
+- Flask, External Libraries
 
 ---
 
@@ -56,46 +48,22 @@
 
 ## In Scope
 
-- เกม Hangman
+- เกม Hangman (Classic, AI Assist, VS AI)
 - Web Interface
 - REST API
-- AI Recommendation
-- Machine Learning
+- AI Recommendation ด้วย Decision Tree
 - Documentation
-
-## Out of Scope
-
-- Database
-- User Login
-- Online Multiplayer
-- Cloud Deployment
-- Deep Learning
 
 ---
 
 # 4. Technology Stack
 
-Backend
-
-- Python
-- Flask
-
-Frontend
-
-- HTML
-- CSS
-- JavaScript
-
-Machine Learning
-
-- scikit-learn
-- pandas
-- joblib
-
-Version Control
-
-- Git
-- GitHub
+| ส่วน | เทคโนโลยี |
+|---|---|
+| Backend | Python, Flask |
+| Frontend | HTML, CSS, JavaScript |
+| Machine Learning | scikit-learn, pandas, joblib |
+| Version Control | Git, GitHub |
 
 ---
 
@@ -123,242 +91,93 @@ Flask Backend
 
 โครงงานใช้รูปแบบ Incremental Development โดยแบ่งการพัฒนาออกเป็นหลายส่วน และเพิ่มความสามารถของระบบทีละขั้นตอน
 
-ลำดับการพัฒนา
-
-1. ศึกษาเกม Hangman
-2. ออกแบบ Logic
-3. พัฒนา Game Engine
-4. พัฒนา REST API
-5. พัฒนา Frontend
-6. สร้าง Dataset
-7. Train Machine Learning
-8. เชื่อม AI เข้ากับเกม
-9. ทดสอบระบบ
+1. เลือกหัวข้อและศึกษาเกม Hangman
+2. ออกแบบ Logic และวาง pseudocode
+3. ทำ draft Classic Mode
+4. พัฒนา Flask Backend และ REST API
+5. พัฒนา Frontend และเชื่อม API
+6. Refactor โครงสร้างโปรเจกต์
+7. สร้าง Dataset และเทรนโมเดล AI
+8. เชื่อม AI เข้ากับเกม (AI Assist, VS AI)
+9. ทดสอบและแก้ไข Bug
 10. จัดทำเอกสาร
 
 ---
 
 # 7. Weekly Development Plan
 
-## Week 1
-
-### หัวข้อที่เรียน
-
-- Introduction to Python
-- Variables
-- Data Types
-- Operators
-- Input / Output
-
-### เป้าหมาย
-
-ศึกษากติกาเกม Hangman และออกแบบโครงสร้างโปรแกรม
-
-### แผนงาน
-
-- ศึกษา Gameplay ของ Hangman
-- วิเคราะห์ Requirement
-- ออกแบบ pseudocode
-- ออกแบบโครงสร้างเกม
-- สร้าง WORDS Dictionary
-- ทดลองใช้ random.choice()
-- ทดลองใช้ set()
-- ออกแบบการตรวจชนะด้วย all()
-- เพิ่ม Input Validation
-- กำหนด MAX_WRONG = 6
-
-### ผลลัพธ์ที่คาดหวัง
-
-- ได้ Game Logic
-- ได้ข้อมูลคำศัพท์
-- ได้โครงสร้างหลักของเกม
-
----
-
-## Week 2
-
-### หัวข้อที่เรียน
-
-- if
-- elif
-- else
-- Boolean Expression
-
-### เป้าหมาย
-
-พัฒนา Backend ของเกม
-
-### แผนงาน
-
-- สร้าง Flask Project
-- สร้าง Blueprint
-- สร้าง API New Game
-- สร้าง API Guess
-- พัฒนา HTML
-- พัฒนา CSS
-- พัฒนา JavaScript
-- เชื่อม API กับ Frontend
-- จัดการ Static Files
-
-### ผลลัพธ์ที่คาดหวัง
-
-- เกมสามารถเล่นผ่านเว็บได้
-- Frontend ติดต่อ Backend ได้
-
----
-
-## Week 3
-
-### หัวข้อที่เรียน
-
-- Loop
-- for
-- while
-- break
-- continue
-
-### เป้าหมาย
-
-ปรับโครงสร้างโปรเจกต์ให้รองรับหลายเกม
-
-### แผนงาน
-
-- Refactor Project
-- แยกโฟลเดอร์ Hangman
-- ปรับ README
-- สร้าง words.txt
-- เตรียม Dataset
-
-### ผลลัพธ์ที่คาดหวัง
-
-- โครงสร้างโปรเจกต์เป็นระเบียบ
-- รองรับการเพิ่มเกมใหม่
-
----
-
-## Week 4
-
-### หัวข้อที่เรียน
-
-- Lists
-- Tuples
-
-### เป้าหมาย
-
-สร้าง Machine Learning Dataset
-
-### แผนงาน
-
-- สร้าง make_dataset.py
-- สร้าง hangman_dataset.csv
-- Train Decision Tree
-- Train Logistic Regression
-- Train Naive Bayes
-- เปรียบเทียบ Accuracy
-
-### ผลลัพธ์ที่คาดหวัง
-
-- ได้โมเดล Machine Learning
-- เลือกโมเดลที่ดีที่สุด
-
----
-
-## Week 5
-
-### หัวข้อที่เรียน
-
-- Dictionary
-- Set
-- Functions
-- Modules
-
-### เป้าหมาย
-
-เชื่อม AI เข้ากับเกม
-
-### แผนงาน
-
-- พัฒนา predict.py
-- โหลดโมเดล .pkl
-- พัฒนา AI Assist
-- พัฒนา VS AI
-- สร้าง AI API
-- พัฒนา AI Interface
-- แก้ไข Bug
-- จัดทำ Documentation
-- จัดทำ Test Case
-- จัดทำ Learning Log
-
-### ผลลัพธ์ที่คาดหวัง
-
-- ระบบ AI ทำงานได้
-- เกมสมบูรณ์พร้อมส่ง
+| สัปดาห์ | วันที่ | เป้าหมาย | แผนงาน |
+|---|---|---|---|
+| Week 1 | 19 ก.ค. 2568 (เช้า) | ศึกษาและออกแบบเกม | เลือกหัวข้อ Hangman, ถาม AI เรื่องกติกา, วาง pseudocode, ออกแบบ logic เกม, ทำ draft Classic Mode ด้วย Python fundamentals |
+| Week 1 | 19 ก.ค. 2568 (บ่าย) | พัฒนา Flask Backend และ Classic Mode UI | สร้าง Flask app และ Blueprint, เพิ่ม API `/new` และ `/guess`, สร้างหน้า Menu และ Classic Mode UI, เชื่อม Frontend กับ API |
+| Week 1 | 21 ก.ค. 2568 | Refactor โครงสร้างโปรเจกต์ | ย้าย Hangman ไปโฟลเดอร์เฉพาะเกม, ปรับ README แ1ละข้อมูลสมาชิก |
+| Week 2 | 23 ก.ค. 2568 | สร้าง Dataset และเทรนโมเดล AI | สร้างคลังคำศัพท์, เขียน make_dataset.py, เทรน Decision Tree / Logistic Regression / Naive Bayes, เปรียบเทียบและเลือกโมเดล |
+| Week 2 | 24 ก.ค. 2568 | เชื่อม AI เข้ากับเกม และจัดทำเอกสาร | เขียน predict.py, เพิ่ม AI Assist และ VS AI mode, สร้าง AI API และ UI, แก้ไข Bug, จัดทำ docs, TEST.md, LEARNINGLOG.md |
 
 ---
 
 # 8. Mapping with Course Contents
 
 | Course Topic | Applied in Project |
-|--------------|-------------------|
-| Variables | lives, score, word |
-| Data Types | String, Integer, Boolean |
-| List | WORDS |
-| Dictionary | WORDS Categories |
-| Set | guessed letters |
-| Conditional | ตรวจคำตอบ |
-| Loop | Game Loop |
-| Function | api_guess(), predict() |
-| Module | hangman.py, predict.py |
-| Flask | REST API |
-| Pandas | Dataset |
-| Scikit-learn | Machine Learning |
+|---|---|
+| Variables | `word`, `wrong_count`, `MAX_WRONG` |
+| Data Types | String, Integer, Boolean, List, Dict, Set |
+| List | คำศัพท์ในแต่ละหมวด |
+| Dictionary | `WORDS` จัดหมวดคำศัพท์ |
+| Set | `guessed` เก็บตัวอักษรที่เดาแล้ว |
+| Conditional | ตรวจคำตอบถูก/ผิด ชนะ/แพ้ |
+| Loop | Game loop, วนตรวจ pattern |
+| Function | `_new()`, `api_guess()`, `predict()` |
+| Module | `hangman.py`, `predict.py`, `random`, `joblib` |
+| Flask | REST API, Blueprint, `send_from_directory()` |
+| pandas | สร้างและจัดการ Dataset |
+| scikit-learn | เทรนและใช้งานโมเดล ML |
 
 ---
 
 # 9. Risk Assessment
 
 | Risk | Impact | Solution |
-|------|--------|----------|
+|---|---|---|
 | Dataset มีน้อย | AI Accuracy ต่ำ | เพิ่มจำนวนคำศัพท์ |
 | Route Error | ระบบใช้งานไม่ได้ | แยก Blueprint |
 | Input ผิดรูปแบบ | โปรแกรม Error | Input Validation |
 | UI Bug | ผู้ใช้ใช้งานยาก | User Testing |
-| AI ทายผิด | ประสิทธิภาพลดลง | เปรียบเทียบหลายโมเดล |
+| AI ทายผิดหรือซ้ำ | ประสิทธิภาพลดลง | เปรียบเทียบหลายโมเดล + fallback logic |
 
 ---
 
 # 10. Testing Plan
 
-ทดสอบ
-
-- เริ่มเกมใหม่
-- เดาถูก
-- เดาผิด
-- เดาซ้ำ
-- Input ไม่ถูกต้อง
-- ชนะ
-- แพ้
-- AI Assist
-- VS AI
-- REST API
+| กรณีทดสอบ | ผลที่คาดหวัง |
+|---|---|
+| เริ่มเกมใหม่ | คืน game state พร้อม masked word |
+| เดาถูก | ตัวอักษรปรากฏในคำ |
+| เดาผิด | `wrong_count` เพิ่มขึ้น 1 |
+| เดาซ้ำ | คืน `already_guessed` ไม่เปลี่ยน state |
+| Input ไม่ถูกต้อง | คืน error 400 |
+| ชนะ | `status = "win"` เมื่อเปิดครบทุกตัว |
+| แพ้ | `status = "lose"` เมื่อ `wrong_count >= 6` |
+| AI Assist | คืน hints top-5 ตัวอักษร |
+| VS AI | AI เดาสลับกับผู้เล่น ตรวจสถานะทั้งสองฝ่าย |
 
 ---
 
 # 11. Expected Deliverables
 
-- Source Code
-- GitHub Repository
+- Source Code (GitHub Repository)
 - README.md
 - Plan.md
-- WorkTracking.md
 - CHANGELOG.md
 - TEST.md
 - LEARNINGLOG.md
-- AI Documentation
-- Trained Machine Learning Model
+- docs/ (QUICKSTART, GAMEPLAY, HANGMAN_AI)
+- Trained Machine Learning Model (.pkl)
 
 ---
 
 # 12. Expected Outcomes
 
 เมื่อสิ้นสุดโครงงาน ผู้จัดทำคาดว่าจะสามารถพัฒนาเกม Hangman ที่ทำงานผ่านเว็บได้อย่างสมบูรณ์ พร้อมระบบ AI Recommendation ที่ช่วยแนะนำตัวอักษรสำหรับผู้เล่น อีกทั้งยังสามารถประยุกต์ใช้ความรู้จากรายวิชา Script Programming ทั้งในด้านการเขียนโปรแกรม การจัดการโครงสร้างโปรเจกต์ การใช้ Flask และการนำ Machine Learning มาใช้ในงานจริงได้
+
+← [กลับหน้าโครงการ](README.md)
