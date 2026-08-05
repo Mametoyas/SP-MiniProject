@@ -1,207 +1,381 @@
 # Work Tracking
 
-## Script Programming Mini Project
+## AI-Assisted Hangman Game
+
+**Course:** Script Programming  
+**Project Type:** Mini Project  
+**Development Period:** Week 1 - Week 5
 
 ---
 
-# Team Members
+# 1. Project Team
 
-| Name | Responsibility |
-|------|----------------|
-| Member A | Project Manager / Flask Backend |
-| Member B | Frontend & UI |
-| Member C | Machine Learning |
-| Member D | Testing & Documentation |
-
----
-
-# Weekly Progress
-
-## Week 1
-
-### Member A
-- วิเคราะห์ Requirement
-- วางโครงสร้างโปรเจกต์
-- สร้าง Flask Project
-
-Status : ✅ Completed
+| Member | Responsibility |
+|---------|----------------|
+| Member A | Project Management, Flask Backend |
+| Member B | Frontend Development (HTML/CSS/JavaScript) |
+| Member C | Machine Learning & Dataset |
+| Member D | Testing, Documentation & GitHub |
 
 ---
 
-### Member B
-- ออกแบบหน้า Home
-- ออกแบบหน้า Hangman
+# 2. Working Process
 
-Status : ✅ Completed
+ทีมใช้การพัฒนาแบบ Incremental Development โดยแบ่งการทำงานเป็นหลายช่วงตามบทเรียนในรายวิชา Script Programming และเพิ่มความสามารถของระบบทีละส่วน
+
+การติดตามงานแบ่งออกเป็น
+
+- วางแผนก่อนเริ่มพัฒนา
+- ประชุมสรุปงานประจำสัปดาห์
+- พัฒนาและ Commit ลง GitHub
+- ทดสอบระบบ
+- แก้ไขปัญหา
+- จัดทำเอกสารประกอบ
 
 ---
 
-### Member C
-- ศึกษา Machine Learning
-- รวบรวม Dataset
+# Week 1
 
-Status : ✅ Completed
+## หัวข้อที่เรียน
 
----
+- Python Basics
+- Variables
+- Data Types
+- Operators
+- Input / Output
 
-### Member D
-- เขียนเอกสาร Requirement
-- วางแผนการทดสอบ
+## เป้าหมาย
 
-Status : ✅ Completed
+ศึกษากติกาเกม Hangman และออกแบบ Logic ของระบบ
+
+## งานที่ดำเนินการ
+
+| Task | Member | Status |
+|------|--------|--------|
+| ศึกษากติกาเกม Hangman | A | ✅ |
+| วิเคราะห์ Requirement | A | ✅ |
+| ออกแบบ Pseudocode | A, B | ✅ |
+| สร้าง WORDS Dictionary | B | ✅ |
+| ทดลองใช้ random.choice() | B | ✅ |
+| ทดลองใช้ set() | C | ✅ |
+| เพิ่ม all() ตรวจชนะ | A | ✅ |
+| เพิ่ม Input Validation | C | ✅ |
+| กำหนด MAX_WRONG | A | ✅ |
+
+### Meeting Summary
+
+**วันที่:** 19 กรกฎาคม
+
+หัวข้อ
+
+- เลือกหัวข้อโครงงาน
+- วิเคราะห์เกม Hangman
+- แบ่งหน้าที่สมาชิก
+
+มติ
+
+- ใช้ Flask
+- ใช้ GitHub
+- เตรียมรองรับ AI ในอนาคต
+
+### ปัญหาที่พบ
+
+- ยังไม่เข้าใจ Logic การตรวจชนะ
+- ยังไม่แน่ใจว่าจะเก็บข้อมูลตัวอักษรแบบใด
+
+### วิธีแก้ไข
+
+- ศึกษาเอกสาร Python
+- ใช้ AI อธิบายการใช้ set() และ all()
 
 ---
 
 # Week 2
 
-### Member A
+## หัวข้อที่เรียน
 
-งานที่ทำ
+- Conditionals
+- if
+- elif
+- else
 
-- พัฒนา Game Logic
-- ระบบ Random Word
-- ระบบตรวจคำตอบ
+## เป้าหมาย
 
-Progress
+พัฒนา Backend และเชื่อม Frontend
 
-██████████ 100%
+## งานที่ดำเนินการ
 
----
+| Task | Member | Status |
+|------|--------|--------|
+| สร้าง Flask Project | A | ✅ |
+| สร้าง Blueprint | A | ✅ |
+| API New Game | A | ✅ |
+| API Guess | A | ✅ |
+| HTML Menu | B | ✅ |
+| Hangman UI | B | ✅ |
+| CSS | B | ✅ |
+| JavaScript | B | ✅ |
+| Static Route | C | ✅ |
 
-### Member B
+### Meeting Summary
 
-งานที่ทำ
+หัวข้อ
 
-- CSS
-- JavaScript
-- Responsive Design
+- Review Backend
+- ทดสอบ API
 
-Progress
+ผลการประชุม
 
-██████████ 100%
+Backend สามารถเชื่อมกับ Frontend ได้สำเร็จ
 
----
+### ปัญหาที่พบ
 
-### Member C
+- Route ไม่ถูกต้อง
+- Static File โหลดไม่ได้
 
-งานที่ทำ
+### วิธีแก้ไข
 
-- สร้าง Dataset
-- Feature Engineering
-
-Progress
-
-██████████ 100%
-
----
-
-### Member D
-
-งานที่ทำ
-
-- Unit Test
-- Bug Report
-
-Progress
-
-████████░░ 80%
+- แยก Blueprint
+- ใช้ send_from_directory()
 
 ---
 
 # Week 3
 
-### Member A
+## หัวข้อที่เรียน
 
-- เชื่อม Flask กับ Frontend
-- API สำหรับเกม
+- Loop
+- for
+- while
 
-Status : ✅
+## เป้าหมาย
 
----
+ปรับโครงสร้างโปรเจกต์และเตรียม Dataset
 
-### Member B
+## งานที่ดำเนินการ
 
-- ปรับ UI
-- เพิ่ม Animation
+| Task | Member | Status |
+|------|--------|--------|
+| Refactor Project | A | ✅ |
+| ย้าย Hangman | A | ✅ |
+| ปรับ README | D | ✅ |
+| สร้าง words.txt | C | ✅ |
+| เตรียม Dataset | C | ✅ |
 
-Status : ✅
+### Meeting Summary
 
----
+หัวข้อ
 
-### Member C
+- Review Folder Structure
+- ตรวจสอบ Dataset
 
-- Train Decision Tree
-- Train Logistic Regression
-- Train Naive Bayes
-- เปรียบเทียบ Accuracy
+ผลการประชุม
 
-Status : ✅
+ปรับโครงสร้างให้รองรับหลายเกม
 
----
+### ปัญหาที่พบ
 
-### Member D
+- โฟลเดอร์เริ่มซับซ้อน
+- Dataset ยังมีคำศัพท์น้อย
 
-- Integration Testing
-- Regression Testing
+### วิธีแก้ไข
 
-Status : ✅
+- แยกโฟลเดอร์ตามเกม
+- เพิ่มหมวดคำศัพท์
 
 ---
 
 # Week 4
 
-สิ่งที่ดำเนินการ
+## หัวข้อที่เรียน
 
-- แก้ไข Bug จากการทดสอบ
-- ปรับปรุงประสิทธิภาพ
-- เพิ่ม AI Recommendation
-- ปรับ UI ให้ใช้งานง่าย
+- Lists
+- Tuples
 
-ผลการดำเนินงาน
+## เป้าหมาย
 
-✅ ระบบทำงานได้ครบทุกฟังก์ชัน
+สร้าง Machine Learning Pipeline
+
+## งานที่ดำเนินการ
+
+| Task | Member | Status |
+|------|--------|--------|
+| make_dataset.py | C | ✅ |
+| สร้าง Dataset | C | ✅ |
+| Train Decision Tree | C | ✅ |
+| Train Logistic Regression | C | ✅ |
+| Train Naive Bayes | C | ✅ |
+| เปรียบเทียบผลโมเดล | C | ✅ |
+
+### Meeting Summary
+
+หัวข้อ
+
+- วิเคราะห์ผล Machine Learning
+
+ผลการประชุม
+
+เลือกใช้ Decision Tree
+
+### ปัญหาที่พบ
+
+- Accuracy ของแต่ละโมเดลแตกต่างกัน
+- Feature ยังไม่เพียงพอ
+
+### วิธีแก้ไข
+
+- เพิ่ม candidate_count
+- เพิ่ม revealed
+- ปรับ Feature Engineering
 
 ---
 
-# Final Progress
+# Week 5
+
+## หัวข้อที่เรียน
+
+- Dictionary
+- Set
+- Functions
+- Modules
+
+## เป้าหมาย
+
+เชื่อม AI เข้ากับเกมและจัดทำเอกสาร
+
+## งานที่ดำเนินการ
+
+| Task | Member | Status |
+|------|--------|--------|
+| predict.py | C | ✅ |
+| AI Assist | A | ✅ |
+| VS AI | A | ✅ |
+| AI API | A | ✅ |
+| AI Frontend | B | ✅ |
+| Bug Fix | A, B | ✅ |
+| Documentation | D | ✅ |
+| TEST.md | D | ✅ |
+| LEARNINGLOG.md | D | ✅ |
+| requirements.txt | D | ✅ |
+
+### Meeting Summary
+
+หัวข้อ
+
+- Integration Test
+- User Testing
+- Final Review
+
+ผลการประชุม
+
+ระบบทำงานครบทุกฟังก์ชัน
+
+### ปัญหาที่พบ
+
+- AI แนะนำตัวอักษรซ้ำ
+- ปุ่มกดค้าง
+- สถานะเกมไม่อัปเดต
+
+### วิธีแก้ไข
+
+- เพิ่ม fallback ใน predict()
+- Disable Button หลังเกมจบ
+- ปรับปรุง JavaScript State
+
+---
+
+# 3. GitHub Progress
+
+| Week | Commit Summary |
+|------|----------------|
+| Week 1 | Initial Project Setup |
+| Week 2 | Implement Hangman Backend |
+| Week 3 | Refactor Project Structure |
+| Week 4 | Add Machine Learning Models |
+| Week 5 | Integrate AI and Complete Documentation |
+
+---
+
+# 4. AI Usage Summary
+
+| Activity | Purpose |
+|----------|---------|
+| อธิบายกติกา Hangman | วิเคราะห์ Requirement |
+| ออกแบบ Pseudocode | วาง Logic |
+| อธิบาย random.choice() | สุ่มคำศัพท์ |
+| อธิบาย set() | ป้องกันการเดาซ้ำ |
+| อธิบาย all() | ตรวจสอบการชนะ |
+| อธิบาย Flask Blueprint | แยก Route |
+| อธิบาย REST API | สร้าง Endpoint |
+| อธิบาย Machine Learning | Train Model |
+| อธิบาย Joblib | โหลดโมเดล |
+| อธิบาย Testing | สร้าง Test Case |
+
+---
+
+# 5. Issue Tracking
+
+| Issue | Cause | Solution | Status |
+|------|-------|----------|--------|
+| Route Error | Blueprint | แก้ URL Mapping | ✅ |
+| Static File Error | Path ไม่ถูกต้อง | send_from_directory() | ✅ |
+| Input Validation | รับข้อมูลผิด | ตรวจสอบ isalpha() | ✅ |
+| Duplicate Guess | ใช้ List | เปลี่ยนเป็น Set | ✅ |
+| AI Prediction ซ้ำ | Model Output | เพิ่ม Fallback | ✅ |
+| UI ไม่อัปเดต | JavaScript State | Refactor Logic | ✅ |
+
+---
+
+# 6. Testing Progress
+
+| Module | Status |
+|---------|--------|
+| New Game | ✅ |
+| Guess Letter | ✅ |
+| Win Condition | ✅ |
+| Lose Condition | ✅ |
+| Input Validation | ✅ |
+| AI Assist | ✅ |
+| VS AI | ✅ |
+| REST API | ✅ |
+| Dataset Generation | ✅ |
+| Model Prediction | ✅ |
+
+---
+
+# 7. Final Project Status
 
 | Module | Progress |
 |---------|----------|
-| Frontend | 100% |
 | Backend | 100% |
-| AI Model | 100% |
-| Database/Dataset | 100% |
+| Frontend | 100% |
+| Game Logic | 100% |
+| Machine Learning | 100% |
+| API | 100% |
 | Testing | 100% |
 | Documentation | 100% |
 
 ---
 
-# Meeting Record (Summary)
+# 8. Lessons Learned
 
-### Meeting 1
+ตลอดการพัฒนาโครงงาน สมาชิกในทีมได้นำความรู้จากรายวิชา Script Programming มาประยุกต์ใช้จริง ตั้งแต่การออกแบบโครงสร้างโปรแกรม การใช้ตัวแปร การควบคุมการทำงานด้วยเงื่อนไขและลูป การจัดเก็บข้อมูลด้วย List, Dictionary และ Set การแบ่งโปรแกรมออกเป็น Function และ Module ตลอดจนการใช้ Flask เพื่อพัฒนา Web Application และการนำ Machine Learning มาประยุกต์ใช้ในการแนะนำตัวอักษรภายในเกม
 
-- วางแผนโครงสร้างระบบ
-- แบ่งหน้าที่สมาชิก
-
-ผล
-- เริ่มพัฒนา Backend และ Frontend พร้อมกัน
+การใช้ GitHub และ CHANGELOG ทำให้สามารถติดตามความคืบหน้าของโครงการได้อย่างเป็นระบบ ขณะที่การใช้ AI เป็นผู้ช่วยในการอธิบายแนวคิด การตรวจสอบโค้ด และเสนอแนวทางแก้ไขปัญหา ช่วยให้ทีมสามารถพัฒนาโครงงานได้อย่างมีประสิทธิภาพ โดยสมาชิกทุกคนยังคงเป็นผู้วิเคราะห์ ตัดสินใจ และทดสอบระบบด้วยตนเองก่อนนำไปใช้งานจริง
 
 ---
 
-### Meeting 2
+# 9. Overall Progress
 
-- รายงานความคืบหน้า
-- ตรวจสอบ AI Model
+**Project Completion : 100%**
 
-ผล
-- เลือกใช้ Decision Tree เป็นโมเดลหลัก
-
----
-
-### Meeting 3
-
-- ตรวจสอบระบบทั้งหมด
-- ทดสอบก่อนส่งงาน
-
-ผล
-- ระบบพร้อมสำหรับการนำเสนอ
+- ✅ Game Engine
+- ✅ Flask Backend
+- ✅ REST API
+- ✅ Frontend
+- ✅ Machine Learning
+- ✅ AI Assist
+- ✅ VS AI
+- ✅ Testing
+- ✅ Documentation
+- ✅ GitHub Repository
