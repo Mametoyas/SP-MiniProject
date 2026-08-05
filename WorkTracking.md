@@ -10,12 +10,12 @@
 
 # 1. Project Team
 
-| Member | Responsibility |
+| ID |Member | Responsibility |
 |---------|----------------|
-| Member A | Backend & Game Logic |
-| Member B | Frontend Development |
-| Member C | Machine Learning |
-| Member D | Testing & Documentation |
+| 663380518-4 | นายจักรพรรดิ์ มั่งกูล    | Coder (โค้ด) |
+| 663380305-1 | นายเชิดตระกูล แข็งขัน  | Coder (โค้ด) |
+| 663380282-7 | นายพงษกร มานาดี    | Debugger (แก้บั๊ก) |
+| 653380198-5 | นางสาวทักษพร มูลมณี | Planner (วางแผน) |
 
 ---
 
