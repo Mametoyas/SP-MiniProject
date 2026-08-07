@@ -67,6 +67,9 @@
 | 29 | จัดทำเอกสาร `docs/` — ถาม AI วิธีเขียน Quick Start, Gameplay guide และ AI pipeline อธิบาย | `docs/QUICKSTART.md`, `docs/GAMEPLAY.md`, `docs/HANGMAN_AI.md` | มีคู่มือติดตั้ง วิธีเล่นแต่ละโหมด และคำอธิบาย AI pipeline ครบถ้วน |
 | 30 | เขียน `TEST.md` — ถาม AI วิธีวางแผนทดสอบ API และ game logic | `TEST.md` | มีกรณีทดสอบ: เริ่มเกมใหม่, เดาถูก, เดาผิด, เดาซ้ำ, input ไม่ถูกต้อง, ชนะ, แพ้ |
 | 31 | เขียน `LEARNINGLOG.md` — บันทึกสิ่งที่เรียนรู้ตลอดโครงงาน รวมถึงการใช้ AI อย่างรับผิดชอบ | `LEARNINGLOG.md` | บันทึก prompt, response, การทดลอง และข้อสังเกตของทีมตลอดโครงงาน |
+| 32 | เขียน `Plan.md` — วางแผนการพัฒนาโครงงานทั้ง 5 สัปดาห์ ครอบคลุม objectives, scope, weekly plan และ risk assessment | `Plan.md` | มีแผนงานรายสัปดาห์ที่สอดคล้องกับ CHANGELOG และ mapping กับ course contents |
+| 33 | เขียน `WorkTracking.md` — ติดตามความคืบหน้าของงานแต่ละส่วน | `WorkTracking.md` | มีบันทึกสถานะงานของสมาชิกแต่ละคนตลอดโครงงาน |
+| 34 | อัปเดต `README.md` — เพิ่มลิงก์ไปยัง `Plan.md` และ `WorkTracking.md` ในตารางเอกสารเพิ่มเติม | `README.md` | README มีลิงก์ครบทุกไฟล์เอกสารของโครงงาน |
 
 ---
 
